@@ -155,34 +155,25 @@ The 20 most abundant families were unequally distributed between AAPs and ANPs (
 
 ### Indicator Species
 
-|                         | Indicator |  Strength|  Pvalue|
-|-------------------------|:----------|---------:|-------:|
-| Aparisthmium cordatum   | AAP       |     0.775|   0.020|
-| Astrocaryum sciophilum  | AAP       |     0.916|   0.010|
-| Batesia floribunda      | AAP       |     0.775|   0.045|
-| Conceveiba guianensis   | AAP       |     0.901|   0.010|
-| Eugenia coffeifolia     | AAP       |     0.775|   0.045|
-| Guarea gomma            | AAP       |     0.775|   0.045|
-| Guarea kunthiana        | AAP       |     0.775|   0.045|
-| Inga acrocephala        | AAP       |     0.824|   0.025|
-| Inga alba               | AAP       |     0.857|   0.025|
-| Inga huberi             | AAP       |     0.892|   0.020|
-| Laetia procera          | AAP       |     0.898|   0.035|
-| Lecythis poiteaui       | AAP       |     0.851|   0.010|
-| Licaria martiniana      | AAP       |     0.863|   0.040|
-| Ocotea floribunda       | AAP       |     0.775|   0.050|
-| Ocotea oblonga          | AAP       |     0.775|   0.050|
-| Oenocarpus bacaba       | AAP       |     0.875|   0.035|
-| Pourouma minor          | AAP       |     0.889|   0.020|
-| Pourouma mollis         | AAP       |     0.775|   0.045|
-| Protium apiculatum      | AAP       |     0.851|   0.025|
-| Protium trifoliolatum   | AAP       |     0.963|   0.005|
-| Sacoglottis cydonioides | AAP       |     0.843|   0.030|
-| Socratea exorrhiza      | AAP       |     0.775|   0.045|
-| Aspidosperma album      | ANP       |     1.000|   0.030|
-| Cordia sagotii          | ANP       |     0.811|   0.040|
-| Couratari multiflora    | ANP       |     1.000|   0.010|
-| Lecythis persistens     | ANP       |     0.729|   0.025|
-| Mouriri crassifolia     | ANP       |     1.000|   0.015|
-| Simaba cedron           | ANP       |     1.000|   0.025|
-| Thyrsodium guianense    | ANP       |     1.000|   0.040|
+The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. Pourouma minor, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
+
+| Family          | Species                 | Indicator |  Strength|  Pvalue|
+|:----------------|:------------------------|:----------|---------:|-------:|
+| Euphorbiaceae   | Aparisthmium cordatum   | AAP       |     0.775|   0.040|
+| Arecaceae       | Astrocaryum sciophilum  | AAP       |     0.916|   0.025|
+| Euphorbiaceae   | Conceveiba guianensis   | AAP       |     0.901|   0.030|
+| Fabaceae        | Inga acrocephala        | AAP       |     0.824|   0.045|
+| Fabaceae        | Inga alba               | AAP       |     0.857|   0.020|
+| Fabaceae        | Inga huberi             | AAP       |     0.892|   0.040|
+| Salicaceae      | Laetia procera          | AAP       |     0.898|   0.035|
+| Arecaceae       | Oenocarpus bacaba       | AAP       |     0.875|   0.035|
+| Urticaceae      | Pourouma minor          | AAP       |     0.889|   0.015|
+| Burseraceae     | Protium apiculatum      | AAP       |     0.851|   0.025|
+| Burseraceae     | Protium trifoliolatum   | AAP       |     0.963|   0.025|
+| Humiriaceae     | Sacoglottis cydonioides | AAP       |     0.843|   0.040|
+| Lecythidaceae   | Couratari multiflora    | ANP       |     1.000|   0.025|
+| Lecythidaceae   | Lecythis persistens     | ANP       |     0.729|   0.010|
+| Melastomataceae | Mouriri crassifolia     | ANP       |     1.000|   0.035|
+| Simaroubaceae   | Simaba cedron           | ANP       |     1.000|   0.035|
+
+*Indicator species in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP), Families, Botanical names, Strength of the Association and P values.*
