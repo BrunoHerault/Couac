@@ -16,8 +16,11 @@ Bruno Hérault
     -   [Ethnobotanical surveys](#ethnobotanical-surveys)
         -   [Ethics in ethnobotanical data access](#ethics-in-ethnobotanical-data-access)
         -   [Data collection](#data-collection)
-        -   [Creation of ethnobotanical databases](#creation-of-ethnobotanical-databases)
-    -   [Including Plots](#including-plots)
+        -   [Creation of a single ethnobotanical database](#creation-of-a-single-ethnobotanical-database)
+        -   [Uses and parts categories](#uses-and-parts-categories)
+        -   [Synthetic use values](#synthetic-use-values)
+        -   [Testing local assemblages](#testing-local-assemblages)
+-   [Results](#results)
 
 Materials and Methods
 =====================
@@ -30,7 +33,7 @@ This study involved 13 permanent plots, including 12 from the Guyafor network (G
 Archaeological diagnosis
 ------------------------
 
-#### Prospection
+### Prospection
 
 The surface of each plot was diagnosed by archaeologists. Evidence for pre-Columbian human occupations (such as artifacts, dark soils, earthworks) was searched for in the field, by superficial prospection of the ground surface while walking and carefully examining soils expelled from burrows and mounds resulting from uprooted trees. Exploratory, localized pits were also dug to confirm surface observations and to establish archaeological sequences. This allowed classifying plots as either “Apparently Anthropized Plot” (AAP) or “Apparently Non-anthropized Plot” (ANP).
 
@@ -80,12 +83,32 @@ Teko ethnobotanical data were collected by G. Odonne, D. Davy and M. Bruno. The 
 
 Arawak ethnobotanical data were obtained from van Andel’s study with Arawak populations in northwestern Guyana (van Andel, 2000). The knowledge was recorded through repeated passages in seven plots of one hectare and through ethnobotanical walks.
 
-### Creation of ethnobotanical databases
+### Creation of a single ethnobotanical database
 
-Databases were created taking into account information of the 457 species present in all plots. Species represented by only one or two individuals were excluded, considering that rare species are less known and therefore more likely to be misidentified. These represented 6.6 % of all individuals (538/8104 individuals) and 46.6 % of the species (419/899 species). Botanical data were updated and standardized according to APGIII classification (Boyle et al., 2013; Bremer et al., 2009). 2.4.4. Uses and parts categories Due to the difficulty of determining clear “human impact” categories, two sets of categories were designed to reflect the pressure on the environment: the first one is a “traditional use” classification, and the second one is a “plant parts” classification. Traditional use categories were compiled following previous studies (Balée, 1994; Burst, 2011; Chazdon and Coe, 1999; Grenand, 1992; Prance et al., 1987): “construction”, “firewood”, “human food”, “medicine and magic”, and “arts and crafts”. A species can enter from 0 to 5 categories. The “construction” category includes species used for posts and other structural elements of buildings. Species of large diameter (&gt; 50cm diameter at breast height) used now as timber according to ONF (2004) and requiring the use of a chainsaw, were removed. Without metal, these species were not used or significantly less used by pre-Columbian populations than in the present day. Species used split or requiring no mechanical process for preparation of their wood (round wood) were retained for analysis. Then, “firewood” category was intentionally kept apart from construction woods as contemporary Amerindians often collected firewood dry, leading to a distinct pattern of collecting. The “human food” category encompasses main and secondary foods, as well as plants used for seasoning, excluding plants used as fishing/hunting baits. The “medicinal and magic” category includes medicinal plants, poisons, body dyes, plants used for hygiene. The category “arts and crafts” includes plants used to make musical instruments, weapons, games, tools, paddles, pirogues, and artisanal dyes. The second system of classification used is that of the “plant parts” categories, as the use categories are not necessarily the best proxy to determine the impacts of traditional uses on the resource (felling of a tree to make a house has evident consequences, but taking a piece of bark from a tree for medicine might provoke a defensive reaction enhancing the tree’s probability of survival). We judged that making categories of both uses and parts at the same time would split the dataset into too many categories. Plant parts categories we retained are: “bark”, “wood and stems”, “seeds and fruits”, “leaves and flowers”, “exudates”, and “underground organs”. 2.4.5. Use value Use values were established separately for categories of traditional uses and for plant part categories, in a non-quantitative way, based on the assumption that while contemporary uses reflect past uses, the frequency of contemporary use does not necessarily reflect the frequency of pre-Columbian use. Each species cited at least once for a given contemporary use was thus given a use value of 1 for the corresponding category (organ or use), regardless of how many present day groups use it. The major advantage of the non-quantitative approach is to avoid the bias induced by the variable presence of a species in the territories of different ethnic groups within the region, and the probable methodological differences among the ethnobotanical studies, leading to imbalances between cultural groups. 2.4.6. Comparison of distribution of useful species among plots To compare the distribution of useful species between AAP and ANP plots, a matrix was designed giving to every tree of the plots a 0/1 value for each category mentioned above. The matrix was submitted to an analysis of variance (ANOVA) with one factor (lm function in R), in order to compare the distribution of both “use categories” and “useful parts” categories between AAPs and ANPs plots.
+Databases were created taking into account information of the 457 species present in all plots. Species represented by only one or two individuals were excluded, considering that rare species are less known and therefore more likely to be misidentified. These represented 6.6 % of all individuals (538/8104 individuals) and 46.6 % of the species (419/899 species). Botanical data were updated and standardized according to APGIII classification (Boyle et al., 2013; Bremer et al., 2009).
 
-Including Plots
----------------
+### Uses and parts categories
+
+#### Traditional uses
+
+Traditional use categories were compiled following previous studies (Balée, 1994; Chazdon and Coe, 1999; Grenand, 1992; Prance et al., 1987): “construction”, “firewood”, “human food”, “medicine and magic”, and “arts and crafts”. A species can enter from 0 to 5 categories. The “construction” category includes species used for posts and other structural elements of buildings. Species of large diameter (&gt; 50cm diameter at breast height) used now as timber in French Guiana and requiring the use of a chainsaw, were removed. Without metal, these species were not used or significantly less used by pre-Columbian populations than in the present day. Species used split or requiring no mechanical process for preparation of their wood (round wood) were retained for analysis. Then, “firewood” category was intentionally kept apart from construction woods as contemporary Amerindians often collected firewood dry, leading to a distinct pattern of collecting. The “human food” category encompasses main and secondary foods, as well as plants used for seasoning, excluding plants used as fishing/hunting baits. The “medicinal and magic” category includes medicinal plants, poisons, body dyes, plants used for hygiene. The category “arts and crafts” includes plants used to make musical instruments, weapons, games, tools, paddles, pirogues, and artisanal dyes.
+
+#### Plant parts
+
+The second system of classification used is that of the “plant parts” categories, as the use categories are not necessarily the best proxy to determine the impacts of traditional uses on the resource (felling of a tree to make a house has evident consequences, but taking a piece of bark from a tree for medicine might provoke a defensive reaction enhancing the tree’s probability of survival). We judged that making categories of both uses and parts at the same time would split the dataset into too many subtle categories. Plant parts categories we retained are: “bark”, “wood and stems”, “seeds and fruits”, “leaves and flowers”, “exudates”, and “underground organs”.
+
+### Synthetic use values
+
+Use values were established separately for traditional uses and for plant parts, in a binary way, based on the assumption that while contemporary uses may reflect past uses, the frequency of contemporary use does not necessarily reflect the frequency of pre-Columbian use. Each species cited at least once for a given contemporary use was thus given a use value of 1 for the corresponding category (traditional uses or plant parts), regardless of how many present day groups use it. The major advantage of the non-quantitative approach is to avoid the bias induced by the variable presence of a species in the territories of different ethnic groups within the region, and the probable methodological differences among the ethnobotanical studies, leading to imbalances between cultural groups.
+
+To compare the distribution of use values between AAP and ANP plots, Wilcoxon-Mann-Whitney tests were used.
+
+### Testing local assemblages
+
+*to be done by Maxime Burst*
+
+Results
+=======
 
 You can also embed plots, for example:
 
