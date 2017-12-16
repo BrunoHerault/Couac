@@ -9,9 +9,9 @@ Bruno Hérault
         -   [Prospection](#prospection)
         -   [Dating](#dating)
     -   [Effect of anthropization on tree assemblages](#effect-of-anthropization-on-tree-assemblages)
-        -   [Composition](#composition)
-        -   [Main family abundances](#main-family-abundances)
-        -   [Indicator species](#indicator-species)
+        -   [Forest Composition](#forest-composition)
+        -   [Botanical Families](#botanical-families)
+        -   [Indicator Species](#indicator-species)
         -   [Diversity](#diversity)
     -   [Ethnobotanical surveys](#ethnobotanical-surveys)
         -   [Ethics in ethnobotanical data access](#ethics-in-ethnobotanical-data-access)
@@ -22,8 +22,9 @@ Bruno Hérault
         -   [Testing local assemblages](#testing-local-assemblages)
 -   [Results](#results)
     -   [Effect of pre-columbian anthropization on current tree communities](#effect-of-pre-columbian-anthropization-on-current-tree-communities)
-        -   [Forest composition](#forest-composition)
-        -   [Botanical Families](#botanical-families)
+        -   [Forest composition](#forest-composition-1)
+        -   [Botanical Families](#botanical-families-1)
+        -   [Indicator Species](#indicator-species-1)
 
 Materials and Methods
 =====================
@@ -32,38 +33,6 @@ Sampled forests
 ---------------
 
 This study involved 13 permanent plots, including 12 from the Guyafor network (Grau et al. 2017) distributed throughout the northern two-thirds of French Guiana (Figure 1). All individual trees (≥ 10 cm in diameter-at-breast-height) present in the plots were marked, mapped, measured and botanically identified. The total dataset included 8995 trees. Individuals not determined to the genus level represent 4.02% of all individuals.
-
-``` r
-library(knitr)
-data<-read.csv2("data_v2.csv")
-# data selection
-data<-data[!data$Libelle=="Cplo",]
-data<-data[!data$Libelle=="Lau",]
-data<-data[!data$Libelle=="Tres",]
-#sel<-data[(data$Libelle=="NouPP"),]
-#sel<-sel[(sel$NumCarre=="204"),]
-data<-data[!(data$Libelle=="NouPP"),]
-#data<-rbind(data,sel)
-sel<-data[(data$Libelle=="Tort"),]
-sel<-sel[(sel$X<=100 & sel$Y<=100),]
-data<-data[!(data$Libelle=="Tort"),]
-data<-rbind(data,sel)
-sel<-data[(data$Libelle=="Trin"),]
-sel<-sel[(sel$NumCarre=="1"),]
-data<-data[!(data$Libelle=="Trin"),]
-data<-rbind(data,sel)
-data$Libelle<-as.factor(as.character(data$Libelle))
-tab<-data.frame("Plot_Name"=names(table(data$Libelle)), 
-                "N_trees"=as.numeric(table(data$Libelle)),
-                "N_family"=as.numeric(summary(tapply(data$Famille,data$Libelle,unique))[,1]),
-                "N_genera"=as.numeric(summary(tapply(data$Genre,data$Libelle,unique))[,1]),
-                "N_species"=as.numeric(summary(tapply(data$idTaxon,data$Libelle,unique))[,1]),
-                "Perc_Determination"=round(100-as.numeric(table(data[data$Espece=="Indet.",]$Libelle)/table(data$Libelle)*100),2),
-                "Plot_Area"=c(1,1, "NA", "NA", "NA", "NA",1,1,1.56,1,1,1,1),
-                "Type"=c("AAP","ANP","AAP","AAP","AAP","AAP","ANP","ANP","ANP","ANP","ANP","ANP","ANP"))
-tab[tab$Plot_Name=="Mcwila",]$N_species=length(unique(paste(data[data$Libelle=="Mcwila",]$Genre,data[data$Libelle=="Mcwila",]$Espece)))
-kable(tab)
-```
 
 | Plot\_Name |  N\_trees|  N\_family|  N\_genera|  N\_species|  Perc\_Determination| Plot\_Area | Type |
 |:-----------|---------:|----------:|----------:|-----------:|--------------------:|:-----------|:-----|
@@ -97,15 +66,15 @@ Dating was performed by AMS by the Radiocarbon Laboratory (A. Mickiewicz Univers
 Effect of anthropization on tree assemblages
 --------------------------------------------
 
-### Composition
+### Forest Composition
 
 The differences in floristic composition among plots were compared with a Detrended Correspondence Factor Analysis (DCA), using the “decorana” function (Hill and Gauch, 1980; Oksanen and Minchin, 1997) of the “vegan” package (Oksanen et al., 2015) available on R.
 
-### Main family abundances
+### Botanical Families
 
 The distribution and the relative abundance of the 20 families that accounted for most individuals in the plots were submitted to a Wilcoxon-Mann-Whitney test to determine the significance of differences for each family in distribution between AAP and ANP plots.
 
-### Indicator species
+### Indicator Species
 
 Indicator species are species whose abundance was found in this study to be correlated with Pre-Columbian occupation. This correlation can be either direct (managed species) or indirect (consequence of a specific pattern of recolonization after occupation), and positive (species for which human occupation is favorable) or negative (species for which past human occupation is detrimental). We used the Dufrene and Legendre (1997) methodology with the package indicspecies (De Cáceres et al.,2012).
 
@@ -172,24 +141,6 @@ Effect of pre-columbian anthropization on current tree communities
 
 AAPs and ANPs plots are well separated along the 1st axis of the DCA (figure 2). AAP sites were grouped towards the right side of the axis 1 that represents 35% of the observed variation in species composition. Past human occupation is thus the main source of differences in species composition among our sampled plots.
 
-``` r
-library(vegan)
-data<-data[!data$Espece=="Indet.",]
-data<-data[!is.na(data$Genre),]
-data$species<-paste(data$Genre,data$Espece, sep=" ")
-data_dca<-t(table(data$species,data$Libelle))
-dca<-decorana(data_dca)
-plot(dca$cproj[,1:2], cex=0.1, xlab="Axis 1 (35.0%)", ylab="Axis 2 (23.8%)")
-points(dca$rproj[,1:2], col=tab$Type, pch=15, cex=1)
-x<-round(as.numeric(dca$rproj[,1]),2)
-y<-round(as.numeric(dca$rproj[,2]),2)
-y[9]<-y[9]+0.2
-y[8]<-y[8]+0.2
-y[3]<-y[3]-0.2
-y[5]<-y[5]+0.2
-text(x, y, tab$Plot_Name, pos=4)
-```
-
 ![](CouacAnalyses_files/figure-markdown_github/dca-1.png)
 
 *Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAPs (black) or ANPs (red).*
@@ -198,27 +149,40 @@ text(x, y, tab$Plot_Name, pos=4)
 
 The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Only three families had clear patterns of segregation (*P* &lt; 0.05). These are Arecaceae, Burseraceae and Lauraceae that are significantly more frequent in AAPs. On the other hand, Apocynaceae and Lecythidaceae are marginally (*P*&lt;0.1) less frequent in AAPs.
 
-``` r
-library(ggplot2)
-data_fam<-data[data$Famille %in% names(sort(table(data$Famille),decreasing = T))[1:20],]
-data_fam$Famille<-as.factor(as.character(data_fam$Famille))
-data_fam<-as.data.frame(table(data_fam$Libelle,data_fam$Famille)/rowSums(table(data_fam$Libelle,data_fam$Famille)))
-data_fam<-merge(data_fam,tab, by.x="Var1", by.y="Plot_Name")
-data_fam$Sites<-data_fam$Var1
-fam<-levels(data_fam$Var2)
-data_fam$Var2<-as.character(data_fam$Var2)
-for (i in fam){
-test<-round(wilcox.test(data_fam[data_fam$Var2==i & data_fam$Type=="AAP",]$Freq,
-            data_fam[data_fam$Var2==i & data_fam$Type=="ANP",]$Freq)$p.value,2)
-data_fam[data_fam$Var2== i,]$Var2<-paste(i," (P=", test, ")", sep="")}
-p <- ggplot(data = data_fam, aes(x=Var2, y=Freq)) + 
-  geom_boxplot(aes(fill=Type)) +
-  theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
-  labs(y = "Relative Frequencies") +
-  coord_flip()
-p + facet_wrap( ~ Var2, scales="free")
-```
-
 ![](CouacAnalyses_files/figure-markdown_github/fam-1.png)
 
 *Relative frequencies of the 20 most abundant families in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP). Wilcoxon Rank test of significance.*
+
+### Indicator Species
+
+|                         | Indicator |  Strength|  Pvalue|
+|-------------------------|:----------|---------:|-------:|
+| Aparisthmium cordatum   | AAP       |     0.775|   0.020|
+| Astrocaryum sciophilum  | AAP       |     0.916|   0.010|
+| Batesia floribunda      | AAP       |     0.775|   0.045|
+| Conceveiba guianensis   | AAP       |     0.901|   0.010|
+| Eugenia coffeifolia     | AAP       |     0.775|   0.045|
+| Guarea gomma            | AAP       |     0.775|   0.045|
+| Guarea kunthiana        | AAP       |     0.775|   0.045|
+| Inga acrocephala        | AAP       |     0.824|   0.025|
+| Inga alba               | AAP       |     0.857|   0.025|
+| Inga huberi             | AAP       |     0.892|   0.020|
+| Laetia procera          | AAP       |     0.898|   0.035|
+| Lecythis poiteaui       | AAP       |     0.851|   0.010|
+| Licaria martiniana      | AAP       |     0.863|   0.040|
+| Ocotea floribunda       | AAP       |     0.775|   0.050|
+| Ocotea oblonga          | AAP       |     0.775|   0.050|
+| Oenocarpus bacaba       | AAP       |     0.875|   0.035|
+| Pourouma minor          | AAP       |     0.889|   0.020|
+| Pourouma mollis         | AAP       |     0.775|   0.045|
+| Protium apiculatum      | AAP       |     0.851|   0.025|
+| Protium trifoliolatum   | AAP       |     0.963|   0.005|
+| Sacoglottis cydonioides | AAP       |     0.843|   0.030|
+| Socratea exorrhiza      | AAP       |     0.775|   0.045|
+| Aspidosperma album      | ANP       |     1.000|   0.030|
+| Cordia sagotii          | ANP       |     0.811|   0.040|
+| Couratari multiflora    | ANP       |     1.000|   0.010|
+| Lecythis persistens     | ANP       |     0.729|   0.025|
+| Mouriri crassifolia     | ANP       |     1.000|   0.015|
+| Simaba cedron           | ANP       |     1.000|   0.025|
+| Thyrsodium guianense    | ANP       |     1.000|   0.040|
