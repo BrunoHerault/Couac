@@ -33,6 +33,38 @@ Sampled forests
 
 This study involved 13 permanent plots, including 12 from the Guyafor network (Grau et al. 2017) distributed throughout the northern two-thirds of French Guiana (Figure 1). All individual trees (≥ 10 cm in diameter-at-breast-height) present in the plots were marked, mapped, measured and botanically identified. The total dataset included 8995 trees. Individuals not determined to the genus level represent 4.02% of all individuals.
 
+``` r
+library(knitr)
+data<-read.csv2("data_v2.csv")
+# data selection
+data<-data[!data$Libelle=="Cplo",]
+data<-data[!data$Libelle=="Lau",]
+data<-data[!data$Libelle=="Tres",]
+#sel<-data[(data$Libelle=="NouPP"),]
+#sel<-sel[(sel$NumCarre=="204"),]
+data<-data[!(data$Libelle=="NouPP"),]
+#data<-rbind(data,sel)
+sel<-data[(data$Libelle=="Tort"),]
+sel<-sel[(sel$X<=100 & sel$Y<=100),]
+data<-data[!(data$Libelle=="Tort"),]
+data<-rbind(data,sel)
+sel<-data[(data$Libelle=="Trin"),]
+sel<-sel[(sel$NumCarre=="1"),]
+data<-data[!(data$Libelle=="Trin"),]
+data<-rbind(data,sel)
+data$Libelle<-as.factor(as.character(data$Libelle))
+tab<-data.frame("Plot_Name"=names(table(data$Libelle)), 
+                "N_trees"=as.numeric(table(data$Libelle)),
+                "N_family"=as.numeric(summary(tapply(data$Famille,data$Libelle,unique))[,1]),
+                "N_genera"=as.numeric(summary(tapply(data$Genre,data$Libelle,unique))[,1]),
+                "N_species"=as.numeric(summary(tapply(data$idTaxon,data$Libelle,unique))[,1]),
+                "Perc_Determination"=round(100-as.numeric(table(data[data$Espece=="Indet.",]$Libelle)/table(data$Libelle)*100),2),
+                "Plot_Area"=c(1,1, "NA", "NA", "NA", "NA",1,1,1.56,1,1,1,1),
+                "Type"=c("AAP","ANP","AAP","AAP","AAP","AAP","ANP","ANP","ANP","ANP","ANP","ANP","ANP"))
+tab[tab$Plot_Name=="Mcwila",]$N_species=length(unique(paste(data[data$Libelle=="Mcwila",]$Genre,data[data$Libelle=="Mcwila",]$Espece)))
+kable(tab)
+```
+
 | Plot\_Name |  N\_trees|  N\_family|  N\_genera|  N\_species|  Perc\_Determination| Plot\_Area | Type |
 |:-----------|---------:|----------:|----------:|-----------:|--------------------:|:-----------|:-----|
 | Aca        |       454|         42|         93|         148|                95.59| 1          | AAP  |
@@ -140,6 +172,24 @@ Effect of pre-columbian anthropization on current tree communities
 
 AAPs and ANPs plots are well separated along the 1st axis of the DCA (figure 2). AAP sites were grouped towards the right side of the axis 1 that represents 35% of the observed variation in species composition. Past human occupation is thus the main source of differences in species composition among our sampled plots.
 
+``` r
+library(vegan)
+data<-data[!data$Espece=="Indet.",]
+data<-data[!is.na(data$Genre),]
+data$species<-paste(data$Genre,data$Espece, sep=" ")
+data_dca<-t(table(data$species,data$Libelle))
+dca<-decorana(data_dca)
+plot(dca$cproj[,1:2], cex=0.1, xlab="Axis 1 (35.0%)", ylab="Axis 2 (23.8%)")
+points(dca$rproj[,1:2], col=tab$Type, pch=15, cex=1)
+x<-round(as.numeric(dca$rproj[,1]),2)
+y<-round(as.numeric(dca$rproj[,2]),2)
+y[9]<-y[9]+0.2
+y[8]<-y[8]+0.2
+y[3]<-y[3]-0.2
+y[5]<-y[5]+0.2
+text(x, y, tab$Plot_Name, pos=4)
+```
+
 ![](CouacAnalyses_files/figure-markdown_github/dca-1.png)
 
 *Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAPs (black) or ANPs (red).*
@@ -147,5 +197,25 @@ AAPs and ANPs plots are well separated along the 1st axis of the DCA (figure 2).
 ### Botanical Families
 
 The 20 most abundant families were unequally distributed between AAPs and ANPs. Figure 3 presents the distribution of individuals from each family present in both AAPs and ANPs. Among all the families, only two had clear patterns of segregation (p &lt; 0.05). These are Chrysobalanaceae (59.2 % of the individuals were in ANPs, p &lt; 0.05) and Arecaceae (79.6 % in AAPs, p &lt; 0.03). Lecythidaceae and Clusiaceae were most frequent in ANPs (respectively 65.4 % and 86 %, both p &lt; 0.07). Euphorbiaceae, Urticaceae and Myrtaceae tended to be most frequent in AAPs, with respectively 57.9 %, 82.4 % and 67 % of their individuals on these plots (respectively p &lt; 0.13, 0.11 and 0.09). Annonaceae and Apocynaceae tended to be associated with ANPs, with respectively 62.5 % (p &lt; 0.13) and 64.8 % (p &lt; 0.13) of their individuals on these non-anthropized plots.
+
+``` r
+library(ggplot2)
+data_fam<-data[data$Famille %in% names(sort(table(data$Famille),decreasing = T))[1:20],]
+data_fam$Famille<-as.factor(as.character(data_fam$Famille))
+data_fam<-as.data.frame(table(data_fam$Libelle,data_fam$Famille)/rowSums(table(data_fam$Libelle,data_fam$Famille)))
+data_fam<-merge(data_fam,tab, by.x="Var1", by.y="Plot_Name")
+data_fam$Sites<-data_fam$Var1
+fam<-levels(data_fam$Var2)
+data_fam$Var2<-as.character(data_fam$Var2)
+for (i in fam){
+test<-round(wilcox.test(data_fam[data_fam$Var2==i & data_fam$Type=="AAP",]$Freq,
+            data_fam[data_fam$Var2==i & data_fam$Type=="ANP",]$Freq)$p.value,2)
+data_fam[data_fam$Var2== i,]$Var2<-paste(i," (P=", test, ")", sep="")}
+p <- ggplot(data = data_fam, aes(x=Var2, y=Freq)) + 
+  geom_boxplot(aes(fill=Type)) +
+  theme(axis.text.x=element_blank(), axis.title.x=element_blank())+
+  labs(y = "Relative Frequencies")
+p + facet_wrap( ~ Var2, scales="free")
+```
 
 ![](CouacAnalyses_files/figure-markdown_github/fam-1.png)
