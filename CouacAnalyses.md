@@ -25,6 +25,7 @@ Bruno Hérault
         -   [Forest composition](#forest-composition-1)
         -   [Botanical Families](#botanical-families-1)
         -   [Indicator Species](#indicator-species-1)
+        -   [Diversity](#diversity-1)
 
 Materials and Methods
 =====================
@@ -155,7 +156,7 @@ The 20 most abundant families were unequally distributed between AAPs and ANPs (
 
 ### Indicator Species
 
-The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. Pourouma minor, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
+The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. *Pourouma minor*, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
 
 | Family          | Species                 | Indicator |  Strength|  Pvalue|
 |:----------------|:------------------------|:----------|---------:|-------:|
@@ -177,3 +178,11 @@ The indicator species analysis led to the identification of 13 indicator species
 | Simaroubaceae   | Simaba cedron           | ANP       |     1.000|   0.035|
 
 *Indicator species in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP), Families, Botanical names, Strength of the Association and P values.*
+
+### Diversity
+
+Alpha diversities were assessed for each plot through their diversity profiles that allow to tract the relative importance of rare species in shaping the the plot ranking. Generally, all plots (AAPs and ANPs) share a similar decreasing pattern of diversity. Nevertheless, for q = 0 (species richness),the anthropized plots AAP tend to have higher diversity (Wilcoxon tests, P=0.12) but the weak signal disappears with increasing q (P=0.43 for q=1, P=0.72 for q=2).
+
+![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
+
+*Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).*
