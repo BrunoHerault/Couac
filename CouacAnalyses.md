@@ -3,6 +3,22 @@ CouacAnalyses
 Bruno Hérault
 12/16/2017
 
+-   [Materials and Methods](#materials-and-methods)
+    -   [Sampled forests](#sampled-forests)
+    -   [Archaeological diagnosis](#archaeological-diagnosis)
+        -   [Prospection](#prospection)
+        -   [Dating](#dating)
+    -   [Effect of anthropization on tree assemblages](#effect-of-anthropization-on-tree-assemblages)
+        -   [Composition](#composition)
+        -   [Main family abundances](#main-family-abundances)
+        -   [Indicator species](#indicator-species)
+        -   [Diversity](#diversity)
+    -   [Ethnobotanical surveys](#ethnobotanical-surveys)
+        -   [Ethics in ethnobotanical data access](#ethics-in-ethnobotanical-data-access)
+        -   [Data collection](#data-collection)
+        -   [Creation of ethnobotanical databases](#creation-of-ethnobotanical-databases)
+    -   [Including Plots](#including-plots)
+
 Materials and Methods
 =====================
 
@@ -39,7 +55,34 @@ Indicator species are species whose abundance was found in this study to be corr
 
 ### Diversity
 
-Diversity profiles were drawn for each plot using the “entropart” package (Marcon and Hérault, 2014) available in R. Differences between AAP and ANP plots were tested using Wilcoxon-Mann-Whitney test for the 3 main used orders of diversity (richness, Shannon index, Simpson index). Diversity profiles integrate the three entropy measures. Alpha diversity varies depending on the order q, which is the weight given to rare species in the calculation of diversity. When the rank (q) is equal to 0, this is equivalent to species richness. When it is equal to 1, this corresponds to the Shannon index and when it is equal to 2, it is the Simpson index. Producing these profiles allows appreciation of the modulation of diversity within each studied plot. A community may be considered more diverse than another if its diversity profile is above that for another community for all the values of q. If the curves intersect, there is no ordering relation (Marcon, 2014).
+Diversity profiles were drawn for each plot using the “entropart” package (Marcon and Hérault, 2014) available in R. Differences between AAP and ANP plots were tested using Wilcoxon-Mann-Whitney test for the 3 main used orders of diversity (richness, Shannon index, Simpson index).
+
+Ethnobotanical surveys
+----------------------
+
+Due to the absence of an existing pre-Columbian database on the uses of plants in forests from the Guiana shield, a compilation of contemporary ethnobotanical surveys was conducted. Although contemporary uses probably differ in some ways from past uses, the compilation of available information for present-day Amerindian groups (Palikur, Arawak, Wayãpi, Teko, and Kali’na) belonging to the three linguistic families in French Guiana (respectively Arawak, Tupi-Guarani and Karib) was thought to be the best proxy for potential pre-Columbian uses.
+
+The choice of the datasets to be compiled was driven by three selection criteria: 1) geographical coherence (inclusion of the main cultural groups of the Guiana shield and their knowledge of tree species in the region), 2) completeness (high number of taxa recorded) and 3) quality (reliable methodologies). Most of the information is comprised of unpublished data from previous work, with the exception of those available for the Arawak and Kali’na ethnic groups (details below).
+
+### Ethics in ethnobotanical data access
+
+All the ethnobotanical data were obtained before adoption of the ABS laws in French Guiana, and no written informed consent document was signed between traditional authorities and the researchers, except for the Teko with whom a document was signed between the Chief and the concerned investigators in July 2013. The other works were concluded under the verbal agreement of authorities during long years of continuous fieldwork. The data were nevertheless anonymized in the supplementary material in order to prevent the inappropriate reutilization of traditional knowledge traditional knowledge from undue reutilization.
+
+### Data collection
+
+Palikur and Arawak-Lokono belong to the Arawak linguistic family, Wayãpi and Teko to the Tupi-Guarani linguistic family and Kali'na to the Karib linguistic family. These three families are amongst the most important of those spoken in the Eastern Amazonian lowlands. People of these five Amerindian groups now occupy different ecosystems, ranging from estuaries and coastal savannahs to *terra firme* forests.
+
+Palikur ethnobotanical data were obtained from P. Grenand and colleagues (cf. acknowledgements), accumulated during 30 years of research with key knowledge holders of Palikur communities of French Guiana. The knowledge was recorded through completer. Wayãpi ethnobotanical data were obtained from P. Grenand, and were collected over 40 years of research with key knowledge holders of Wayãpi communities of French Guiana. The knowledge was recorded through completer.
+
+Kali’na ethnobotanical data were compiled by P. Grenand, C. Moretti and M. Fleury, integrating bibliographic data (Ahlbrinck, 1956; Aublet, 1775; Kloos, 1971; ONF, 2004; van Andel, 2000) and field data (ethnobotanical studies conducted between 2006 and 2008). The field data was recorded through completer.
+
+Teko ethnobotanical data were collected by G. Odonne, D. Davy and M. Bruno. The knowledge was recorded through ethnobotanical walks (Prance et al., 1987) and through repeated passages in the 1 ha plots with seven informants.
+
+Arawak ethnobotanical data were obtained from van Andel’s study with Arawak populations in northwestern Guyana (van Andel, 2000). The knowledge was recorded through repeated passages in seven plots of one hectare and through ethnobotanical walks.
+
+### Creation of ethnobotanical databases
+
+Databases were created taking into account information of the 457 species present in all plots. Species represented by only one or two individuals were excluded, considering that rare species are less known and therefore more likely to be misidentified. These represented 6.6 % of all individuals (538/8104 individuals) and 46.6 % of the species (419/899 species). Botanical data were updated and standardized according to APGIII classification (Boyle et al., 2013; Bremer et al., 2009). 2.4.4. Uses and parts categories Due to the difficulty of determining clear “human impact” categories, two sets of categories were designed to reflect the pressure on the environment: the first one is a “traditional use” classification, and the second one is a “plant parts” classification. Traditional use categories were compiled following previous studies (Balée, 1994; Burst, 2011; Chazdon and Coe, 1999; Grenand, 1992; Prance et al., 1987): “construction”, “firewood”, “human food”, “medicine and magic”, and “arts and crafts”. A species can enter from 0 to 5 categories. The “construction” category includes species used for posts and other structural elements of buildings. Species of large diameter (&gt; 50cm diameter at breast height) used now as timber according to ONF (2004) and requiring the use of a chainsaw, were removed. Without metal, these species were not used or significantly less used by pre-Columbian populations than in the present day. Species used split or requiring no mechanical process for preparation of their wood (round wood) were retained for analysis. Then, “firewood” category was intentionally kept apart from construction woods as contemporary Amerindians often collected firewood dry, leading to a distinct pattern of collecting. The “human food” category encompasses main and secondary foods, as well as plants used for seasoning, excluding plants used as fishing/hunting baits. The “medicinal and magic” category includes medicinal plants, poisons, body dyes, plants used for hygiene. The category “arts and crafts” includes plants used to make musical instruments, weapons, games, tools, paddles, pirogues, and artisanal dyes. The second system of classification used is that of the “plant parts” categories, as the use categories are not necessarily the best proxy to determine the impacts of traditional uses on the resource (felling of a tree to make a house has evident consequences, but taking a piece of bark from a tree for medicine might provoke a defensive reaction enhancing the tree’s probability of survival). We judged that making categories of both uses and parts at the same time would split the dataset into too many categories. Plant parts categories we retained are: “bark”, “wood and stems”, “seeds and fruits”, “leaves and flowers”, “exudates”, and “underground organs”. 2.4.5. Use value Use values were established separately for categories of traditional uses and for plant part categories, in a non-quantitative way, based on the assumption that while contemporary uses reflect past uses, the frequency of contemporary use does not necessarily reflect the frequency of pre-Columbian use. Each species cited at least once for a given contemporary use was thus given a use value of 1 for the corresponding category (organ or use), regardless of how many present day groups use it. The major advantage of the non-quantitative approach is to avoid the bias induced by the variable presence of a species in the territories of different ethnic groups within the region, and the probable methodological differences among the ethnobotanical studies, leading to imbalances between cultural groups. 2.4.6. Comparison of distribution of useful species among plots To compare the distribution of useful species between AAP and ANP plots, a matrix was designed giving to every tree of the plots a 0/1 value for each category mentioned above. The matrix was submitted to an analysis of variance (ANOVA) with one factor (lm function in R), in order to compare the distribution of both “use categories” and “useful parts” categories between AAPs and ANPs plots.
 
 Including Plots
 ---------------
