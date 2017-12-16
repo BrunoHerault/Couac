@@ -141,4 +141,4 @@ AAP and ANP plots are well separated along the 1st axis of the DCA (figure 2). A
 
 ![](CouacAnalyses_files/figure-markdown_github/dca-1.png)
 
-*Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAP (black) or ANP (red).*
+*Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAPs (black) or ANPs (red).*
