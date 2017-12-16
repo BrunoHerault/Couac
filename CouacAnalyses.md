@@ -196,7 +196,7 @@ text(x, y, tab$Plot_Name, pos=4)
 
 ### Botanical Families
 
-The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Figure 3 presents the distribution of individuals from each family present in both AAPs and ANPs. Among all the families, only two had clear patterns of segregation (p &lt; 0.05). These are Chrysobalanaceae (59.2 % of the individuals were in ANPs, p &lt; 0.05) and Arecaceae (79.6 % in AAPs, p &lt; 0.03). Lecythidaceae and Clusiaceae were most frequent in ANPs (respectively 65.4 % and 86 %, both p &lt; 0.07). Euphorbiaceae, Urticaceae and Myrtaceae tended to be most frequent in AAPs, with respectively 57.9 %, 82.4 % and 67 % of their individuals on these plots (respectively p &lt; 0.13, 0.11 and 0.09). Annonaceae and Apocynaceae tended to be associated with ANPs, with respectively 62.5 % (p &lt; 0.13) and 64.8 % (p &lt; 0.13) of their individuals on these non-anthropized plots.
+The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Only three families had clear patterns of segregation (*P* &lt; 0.05). These are Arecaceae, Burseraceae and Lauraceae that are significantly more frequent in AAPs. On the other hand, Apocynaceae and Lecythidaceae are marginally (*P*&lt;0.1) less frequent in AAPs.
 
 ``` r
 library(ggplot2)
@@ -220,3 +220,5 @@ p + facet_wrap( ~ Var2, scales="free")
 ```
 
 ![](CouacAnalyses_files/figure-markdown_github/fam-1.png)
+
+*Relative frequencies of the 20 most abundant families in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP). Wilcoxon Rank test of significance.*
