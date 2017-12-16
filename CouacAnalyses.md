@@ -196,7 +196,7 @@ text(x, y, tab$Plot_Name, pos=4)
 
 ### Botanical Families
 
-The 20 most abundant families were unequally distributed between AAPs and ANPs. Figure 3 presents the distribution of individuals from each family present in both AAPs and ANPs. Among all the families, only two had clear patterns of segregation (p &lt; 0.05). These are Chrysobalanaceae (59.2 % of the individuals were in ANPs, p &lt; 0.05) and Arecaceae (79.6 % in AAPs, p &lt; 0.03). Lecythidaceae and Clusiaceae were most frequent in ANPs (respectively 65.4 % and 86 %, both p &lt; 0.07). Euphorbiaceae, Urticaceae and Myrtaceae tended to be most frequent in AAPs, with respectively 57.9 %, 82.4 % and 67 % of their individuals on these plots (respectively p &lt; 0.13, 0.11 and 0.09). Annonaceae and Apocynaceae tended to be associated with ANPs, with respectively 62.5 % (p &lt; 0.13) and 64.8 % (p &lt; 0.13) of their individuals on these non-anthropized plots.
+The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Figure 3 presents the distribution of individuals from each family present in both AAPs and ANPs. Among all the families, only two had clear patterns of segregation (p &lt; 0.05). These are Chrysobalanaceae (59.2 % of the individuals were in ANPs, p &lt; 0.05) and Arecaceae (79.6 % in AAPs, p &lt; 0.03). Lecythidaceae and Clusiaceae were most frequent in ANPs (respectively 65.4 % and 86 %, both p &lt; 0.07). Euphorbiaceae, Urticaceae and Myrtaceae tended to be most frequent in AAPs, with respectively 57.9 %, 82.4 % and 67 % of their individuals on these plots (respectively p &lt; 0.13, 0.11 and 0.09). Annonaceae and Apocynaceae tended to be associated with ANPs, with respectively 62.5 % (p &lt; 0.13) and 64.8 % (p &lt; 0.13) of their individuals on these non-anthropized plots.
 
 ``` r
 library(ggplot2)
@@ -213,8 +213,9 @@ test<-round(wilcox.test(data_fam[data_fam$Var2==i & data_fam$Type=="AAP",]$Freq,
 data_fam[data_fam$Var2== i,]$Var2<-paste(i," (P=", test, ")", sep="")}
 p <- ggplot(data = data_fam, aes(x=Var2, y=Freq)) + 
   geom_boxplot(aes(fill=Type)) +
-  theme(axis.text.x=element_blank(), axis.title.x=element_blank())+
-  labs(y = "Relative Frequencies")
+  theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
+  labs(y = "Relative Frequencies") +
+  coord_flip()
 p + facet_wrap( ~ Var2, scales="free")
 ```
 
