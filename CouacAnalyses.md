@@ -21,6 +21,8 @@ Bruno Hérault
         -   [Synthetic use values](#synthetic-use-values)
         -   [Testing local assemblages](#testing-local-assemblages)
 -   [Results](#results)
+    -   [Effect of pre-columbian anthropization on current tree communities](#effect-of-pre-columbian-anthropization-on-current-tree-communities)
+        -   [Forest tree composition](#forest-tree-composition)
 
 Materials and Methods
 =====================
@@ -29,6 +31,24 @@ Sampled forests
 ---------------
 
 This study involved 13 permanent plots, including 12 from the Guyafor network (Grau et al. 2017) distributed throughout the northern two-thirds of French Guiana (Figure 1). All individual trees (≥ 10 cm in diameter-at-breast-height) present in the plots were marked, mapped, measured and botanically identified. The total dataset included 8633 trees. All individuals not determined to generic level were removed (529 individuales, 6.13% of all individuals).
+
+| Plot\_Name |  N\_trees|  N\_family|  N\_genera|  N\_species| Plot\_Area | Type |
+|:-----------|---------:|----------:|----------:|-----------:|:-----------|:-----|
+| Aca        |       454|         42|         93|         148| 1          | AAP  |
+| Baf        |       756|         39|        106|         183| 1          | ANP  |
+| EpBar      |       974|         49|        142|         283| NA         | AAP  |
+| FC         |       766|         44|        113|         225| NA         | AAP  |
+| MC87       |       824|         44|        126|         276| NA         | AAP  |
+| Mcwila     |       654|         41|        103|           1| NA         | AAP  |
+| NouGP      |       536|         43|        104|         169| 1          | ANP  |
+| Par18      |       499|         42|        103|         158| 1          | ANP  |
+| Par6       |       964|         41|        106|         189| 1.56       | ANP  |
+| Slav       |       620|         44|        106|         200| 1          | ANP  |
+| Tib        |       440|         41|        114|         176| 1          | ANP  |
+| Tort       |       496|         46|        122|         193| 1          | ANP  |
+| Trin       |       650|         40|        112|         187| 1          | ANP  |
+
+*Description of the Sampled Plots*
 
 Archaeological diagnosis
 ------------------------
@@ -110,9 +130,14 @@ To compare the distribution of use values between AAP and ANP plots, Wilcoxon-Ma
 Results
 =======
 
-You can also embed plots, for example:
+*The archeological diagnosis part, as currently written, should be moved to supplementary materials*
 
-![](CouacAnalyses_files/figure-markdown_github/pressure-1.png)
+Effect of pre-columbian anthropization on current tree communities
+------------------------------------------------------------------
+
+### Forest tree composition
+
+You can also embed plots, for example:
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. yes
 
