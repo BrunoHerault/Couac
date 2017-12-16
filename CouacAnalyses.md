@@ -30,23 +30,23 @@ Materials and Methods
 Sampled forests
 ---------------
 
-This study involved 13 permanent plots, including 12 from the Guyafor network (Grau et al. 2017) distributed throughout the northern two-thirds of French Guiana (Figure 1). All individual trees (≥ 10 cm in diameter-at-breast-height) present in the plots were marked, mapped, measured and botanically identified. The total dataset included 8633 trees. All individuals not determined to generic level were removed (529 individuales, 6.13% of all individuals).
+This study involved 13 permanent plots, including 12 from the Guyafor network (Grau et al. 2017) distributed throughout the northern two-thirds of French Guiana (Figure 1). All individual trees (≥ 10 cm in diameter-at-breast-height) present in the plots were marked, mapped, measured and botanically identified. The total dataset included 8995 trees. Individuals not determined to the genus level represent 4.02% of all individuals.
 
-| Plot\_Name |  N\_trees|  N\_family|  N\_genera|  N\_species| Plot\_Area | Type |
-|:-----------|---------:|----------:|----------:|-----------:|:-----------|:-----|
-| Aca        |       454|         42|         93|         148| 1          | AAP  |
-| Baf        |       756|         39|        106|         183| 1          | ANP  |
-| EpBar      |       974|         49|        142|         283| NA         | AAP  |
-| FC         |       766|         44|        113|         225| NA         | AAP  |
-| MC87       |       824|         44|        126|         276| NA         | AAP  |
-| Mcwila     |       654|         41|        103|           1| NA         | AAP  |
-| NouGP      |       536|         43|        104|         169| 1          | ANP  |
-| Par18      |       499|         42|        103|         158| 1          | ANP  |
-| Par6       |       964|         41|        106|         189| 1.56       | ANP  |
-| Slav       |       620|         44|        106|         200| 1          | ANP  |
-| Tib        |       440|         41|        114|         176| 1          | ANP  |
-| Tort       |       496|         46|        122|         193| 1          | ANP  |
-| Trin       |       650|         40|        112|         187| 1          | ANP  |
+| Plot\_Name |  N\_trees|  N\_family|  N\_genera|  N\_species|  Perc\_Determination| Plot\_Area | Type |
+|:-----------|---------:|----------:|----------:|-----------:|--------------------:|:-----------|:-----|
+| Aca        |       454|         42|         93|         148|                95.59| 1          | AAP  |
+| Baf        |       756|         39|        106|         183|                93.65| 1          | ANP  |
+| EpBar      |       974|         49|        142|         283|                85.52| NA         | AAP  |
+| FC         |       766|         44|        113|         225|                98.04| NA         | AAP  |
+| MC87       |       824|         44|        126|         276|                89.56| NA         | AAP  |
+| Mcwila     |       654|         41|        103|         174|                98.32| NA         | AAP  |
+| NouGP      |       536|         43|        104|         169|                89.37| 1          | ANP  |
+| Par18      |       499|         42|        103|         158|                96.39| 1          | ANP  |
+| Par6       |       964|         41|        106|         189|                94.19| 1.56       | ANP  |
+| Slav       |       620|         44|        106|         200|                88.23| 1          | ANP  |
+| Tib        |       440|         41|        114|         176|                95.00| 1          | ANP  |
+| Tort       |       496|         46|        122|         193|                94.15| 1          | ANP  |
+| Trin       |       650|         40|        112|         187|                98.92| 1          | ANP  |
 
 *Description of the Sampled Plots*
 
@@ -137,18 +137,8 @@ Effect of pre-columbian anthropization on current tree communities
 
 ### Forest tree composition
 
-You can also embed plots, for example:
+AAP and ANP plots are well separated along the 1st axis of the DCA (figure 2). AAP sites were grouped towards the right side of the axis 1 that represents 35% of the observed variation in species composition. Past human occupation is thus the main source of differences in species composition among our sampled plots.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. yes
+![](CouacAnalyses_files/figure-markdown_github/dca-1.png)
 
-``` r
-summary(cars)
-```
-
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+*Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAP (black) or ANP (red).*
