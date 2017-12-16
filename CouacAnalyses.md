@@ -22,7 +22,8 @@ Bruno Hérault
         -   [Testing local assemblages](#testing-local-assemblages)
 -   [Results](#results)
     -   [Effect of pre-columbian anthropization on current tree communities](#effect-of-pre-columbian-anthropization-on-current-tree-communities)
-        -   [Forest tree composition](#forest-tree-composition)
+        -   [Forest composition](#forest-composition)
+        -   [Botanical Families](#botanical-families)
 
 Materials and Methods
 =====================
@@ -135,10 +136,16 @@ Results
 Effect of pre-columbian anthropization on current tree communities
 ------------------------------------------------------------------
 
-### Forest tree composition
+### Forest composition
 
 AAPs and ANPs plots are well separated along the 1st axis of the DCA (figure 2). AAP sites were grouped towards the right side of the axis 1 that represents 35% of the observed variation in species composition. Past human occupation is thus the main source of differences in species composition among our sampled plots.
 
 ![](CouacAnalyses_files/figure-markdown_github/dca-1.png)
 
 *Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAPs (black) or ANPs (red).*
+
+### Botanical Families
+
+The 20 most abundant families were unequally distributed between AAPs and ANPs. Figure 3 presents the distribution of individuals from each family present in both AAPs and ANPs. Among all the families, only two had clear patterns of segregation (p &lt; 0.05). These are Chrysobalanaceae (59.2 % of the individuals were in ANPs, p &lt; 0.05) and Arecaceae (79.6 % in AAPs, p &lt; 0.03). Lecythidaceae and Clusiaceae were most frequent in ANPs (respectively 65.4 % and 86 %, both p &lt; 0.07). Euphorbiaceae, Urticaceae and Myrtaceae tended to be most frequent in AAPs, with respectively 57.9 %, 82.4 % and 67 % of their individuals on these plots (respectively p &lt; 0.13, 0.11 and 0.09). Annonaceae and Apocynaceae tended to be associated with ANPs, with respectively 62.5 % (p &lt; 0.13) and 64.8 % (p &lt; 0.13) of their individuals on these non-anthropized plots.
+
+![](CouacAnalyses_files/figure-markdown_github/fam-1.png)
