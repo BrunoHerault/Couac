@@ -61,7 +61,7 @@ tab<-data.frame("Plot_Name"=names(table(data$Libelle)),
                 "N_genera"=as.numeric(summary(tapply(data$Genre,data$Libelle,unique))[,1]),
                 "N_species"=as.numeric(summary(tapply(data$idTaxon,data$Libelle,unique))[,1]),
                 "Perc_Determination"=round(100-as.numeric(table(data[data$Espece=="Indet.",]$Libelle)/table(data$Libelle)*100),2),
-                "Plot_Area"=c(1,1, "NA", "NA", "NA", "NA",1,1,1.56,1,1,1,1),
+                "Plot_Area"=c(1,1, "1.80", "NA", "1.83", "NA",1,1,1.56,1,1,1,1),
                 "Type"=c("AAP","ANP","AAP","AAP","AAP","AAP","ANP","ANP","ANP","ANP","ANP","ANP","ANP"))
 tab[tab$Plot_Name=="Mcwila",]$N_species=length(unique(paste(data[data$Libelle=="Mcwila",]$Genre,data[data$Libelle=="Mcwila",]$Espece)))
 kable(tab)
