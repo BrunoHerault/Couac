@@ -35,6 +35,38 @@ Sampled forests
 
 This study involved 13 permanent plots, including 12 from the Guyafor network (Grau et al. 2017) distributed throughout the northern two-thirds of French Guiana (Figure 1). All individual trees (≥ 10 cm in diameter-at-breast-height) present in the plots were marked, mapped, measured and botanically identified. The total dataset included 8995 trees. Individuals not determined to the genus level represent 4.02% of all individuals.
 
+``` r
+library(knitr)
+data<-read.csv2("data_v2.csv")
+# data selection
+data<-data[!data$Libelle=="Cplo",]
+data<-data[!data$Libelle=="Lau",]
+data<-data[!data$Libelle=="Tres",]
+#sel<-data[(data$Libelle=="NouPP"),]
+#sel<-sel[(sel$NumCarre=="204"),]
+data<-data[!(data$Libelle=="NouPP"),]
+#data<-rbind(data,sel)
+sel<-data[(data$Libelle=="Tort"),]
+sel<-sel[(sel$X<=100 & sel$Y<=100),]
+data<-data[!(data$Libelle=="Tort"),]
+data<-rbind(data,sel)
+sel<-data[(data$Libelle=="Trin"),]
+sel<-sel[(sel$NumCarre=="1"),]
+data<-data[!(data$Libelle=="Trin"),]
+data<-rbind(data,sel)
+data$Libelle<-as.factor(as.character(data$Libelle))
+tab<-data.frame("Plot_Name"=names(table(data$Libelle)), 
+                "N_trees"=as.numeric(table(data$Libelle)),
+                "N_family"=as.numeric(summary(tapply(data$Famille,data$Libelle,unique))[,1]),
+                "N_genera"=as.numeric(summary(tapply(data$Genre,data$Libelle,unique))[,1]),
+                "N_species"=as.numeric(summary(tapply(data$idTaxon,data$Libelle,unique))[,1]),
+                "Perc_Determination"=round(100-as.numeric(table(data[data$Espece=="Indet.",]$Libelle)/table(data$Libelle)*100),2),
+                "Plot_Area"=c(1,1, "NA", "NA", "NA", "NA",1,1,1.56,1,1,1,1),
+                "Type"=c("AAP","ANP","AAP","AAP","AAP","AAP","ANP","ANP","ANP","ANP","ANP","ANP","ANP"))
+tab[tab$Plot_Name=="Mcwila",]$N_species=length(unique(paste(data[data$Libelle=="Mcwila",]$Genre,data[data$Libelle=="Mcwila",]$Espece)))
+kable(tab)
+```
+
 | Plot\_Name |  N\_trees|  N\_family|  N\_genera|  N\_species|  Perc\_Determination| Plot\_Area | Type |
 |:-----------|---------:|----------:|----------:|-----------:|--------------------:|:-----------|:-----|
 | Aca        |       454|         42|         93|         148|                95.59| 1          | AAP  |
@@ -142,6 +174,24 @@ Effect of pre-columbian anthropization on current tree communities
 
 AAPs and ANPs plots are well separated along the 1st axis of the DCA (figure 2). AAP sites were grouped towards the right side of the axis 1 that represents 35% of the observed variation in species composition. Past human occupation is thus the main source of differences in species composition among our sampled plots.
 
+``` r
+library(vegan)
+data<-data[!data$Espece=="Indet.",]
+data<-data[!is.na(data$Genre),]
+data$species<-paste(data$Genre,data$Espece, sep=" ")
+data_dca<-t(table(data$species,data$Libelle))
+dca<-decorana(data_dca)
+plot(dca$cproj[,1:2], cex=0.1, xlab="Axis 1 (35.0%)", ylab="Axis 2 (23.8%)")
+points(dca$rproj[,1:2], col=tab$Type, pch=15, cex=1)
+x<-round(as.numeric(dca$rproj[,1]),2)
+y<-round(as.numeric(dca$rproj[,2]),2)
+y[9]<-y[9]+0.2
+y[8]<-y[8]+0.2
+y[3]<-y[3]-0.2
+y[5]<-y[5]+0.2
+text(x, y, tab$Plot_Name, pos=4)
+```
+
 ![](CouacAnalyses_files/figure-markdown_github/dca-1.png)
 
 *Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAPs (black) or ANPs (red).*
@@ -150,6 +200,27 @@ AAPs and ANPs plots are well separated along the 1st axis of the DCA (figure 2).
 
 The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Only three families had clear patterns of segregation (*P* &lt; 0.05). These are Arecaceae, Burseraceae and Lauraceae that are significantly more frequent in AAPs. On the other hand, Apocynaceae and Lecythidaceae are marginally (*P*&lt;0.1) less frequent in AAPs.
 
+``` r
+library(ggplot2)
+data_fam<-data[data$Famille %in% names(sort(table(data$Famille),decreasing = T))[1:20],]
+data_fam$Famille<-as.factor(as.character(data_fam$Famille))
+data_fam<-as.data.frame(table(data_fam$Libelle,data_fam$Famille)/rowSums(table(data_fam$Libelle,data_fam$Famille)))
+data_fam<-merge(data_fam,tab, by.x="Var1", by.y="Plot_Name")
+data_fam$Sites<-data_fam$Var1
+fam<-levels(data_fam$Var2)
+data_fam$Var2<-as.character(data_fam$Var2)
+for (i in fam){
+test<-round(wilcox.test(data_fam[data_fam$Var2==i & data_fam$Type=="AAP",]$Freq,
+            data_fam[data_fam$Var2==i & data_fam$Type=="ANP",]$Freq)$p.value,2)
+data_fam[data_fam$Var2== i,]$Var2<-paste(i," (P=", test, ")", sep="")}
+p <- ggplot(data = data_fam, aes(x=Var2, y=Freq)) + 
+  geom_boxplot(aes(fill=Type)) +
+  theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
+  labs(y = "Relative Frequencies") +
+  coord_flip()
+p + facet_wrap( ~ Var2, scales="free")
+```
+
 ![](CouacAnalyses_files/figure-markdown_github/fam-1.png)
 
 *Relative frequencies of the 20 most abundant families in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP). Wilcoxon Rank test of significance.*
@@ -157,6 +228,27 @@ The 20 most abundant families were unequally distributed between AAPs and ANPs (
 ### Indicator Species
 
 The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. *Pourouma minor*, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
+
+``` r
+library(indicspecies)
+#IS<-multipatt(as.data.frame.matrix(data_dca),cluster=as.numeric(tab$Type),duleg=T) # save time
+load("IS.Rdata")
+indic<-data.frame(Species=colnames(data_dca)[IS$sign[,5]<0.05],
+                  Indicator=IS$sign$index[IS$sign[,5]<0.05],
+                  Strength=round(IS$str[IS$sign[,5]<0.05,1],3),
+                  Pvalue=round(IS$sign$p.value[IS$sign[,5]<0.05],3))
+indic<-indic[!indic$Species =="Indet.Lauraceae sp.6",]
+fam<-unique(data.frame(Species=data[data$species %in% rownames(indic),]$species, Family=data[data$species %in% rownames(indic),]$Famille))
+indic<-merge(indic,fam)
+indic<-data.frame(Family=indic$Family,Species=indic$Species,Indicator=indic$Indicator, Strength=indic$Strength,Pvalue=indic$Pvalue)
+indic[indic$Indicator==2,]$Indicator<-"ANP"
+indic[indic$Indicator==1,]$Indicator<-"AAP"
+indic[indic$Strength<0.5,]$Strength<-1-indic[indic$Strength<0.5,]$Strength
+indic<-indic[order(indic$Indicator),]
+indic<-indic[-8,]
+rownames(indic)<-NULL
+kable(indic)
+```
 
 | Family          | Species                 | Indicator |  Strength|  Pvalue|
 |:----------------|:------------------------|:----------|---------:|-------:|
@@ -182,6 +274,22 @@ The indicator species analysis led to the identification of 13 indicator species
 ### Diversity
 
 Alpha diversities were assessed for each plot through their diversity profiles that allow to tract the relative importance of rare species in shaping the the plot ranking. Generally, all plots (AAPs and ANPs) share a similar decreasing pattern of diversity. Nevertheless, for q = 0 (species richness),the anthropized plots AAP tend to have higher diversity (Wilcoxon tests, P=0.12) but the weak signal disappears with increasing q (P=0.43 for q=1, P=0.72 for q=2).
+
+``` r
+library(entropart)
+meta<-MetaCommunity(t(data_dca))
+Profile <- DivProfile(q.seq = seq(0, 3, 0.03), meta, Biased = FALSE)
+q0<-wilcox.test(Profile$CommunityAlphaDiversities[1,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[1,as.numeric(tab$Type)==2])
+q1<-wilcox.test(Profile$CommunityAlphaDiversities[33,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[33,as.numeric(tab$Type)==2])
+q2<-wilcox.test(Profile$CommunityAlphaDiversities[67,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[67,as.numeric(tab$Type)==2])
+plot(rownames(Profile$CommunityAlphaDiversities),Profile$CommunityAlphaDiversities[,1], type="l", col="red", ylab="Alpha Diversity", xlab="Diversity Order q", lty=2, ylim=c(0,450))
+color<-as.character(tab$Type)
+color[color=="AAP"]<-"red"
+color[color=="ANP"]<-"black"
+for (i in 2:13){
+  points(rownames(Profile$CommunityAlphaDiversities),Profile$CommunityAlphaDiversities[,i], type="l", lty=((-as.numeric(tab$Type)+3)[i]), col=color[i])
+}
+```
 
 ![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
 
