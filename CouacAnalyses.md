@@ -366,4 +366,42 @@ Ethnobotanical Analysis
 
 ### Traditional uses
 
+Use categories of the trees in each plot were submitted to an ANOVA (one factor, lm function in R) in order to detect relationships between uses and species composition of plot. The different trends are shown in figure 6. Plants used as human food were significantly more often present (p &lt; 0.02) in AAPs than in ANPs. This trend was also observed for species used as firewood, although it was less evident (p &lt; 0.09). No conclusion can be drawn for species in the “medicine and magic” and “arts and crafts” categories owing to their high p values. Lastly, species used in construction tended to be more often present (p &lt; 0.09) in non-anthropogenic plots (ANPs) than in AAPs. These trends are important result of our study, corroborating the results of section 3.2 (figure 2). Presence of human occupation seems to be detectable up to 600 or even 1000 years after the presumed occupation, and biocultural interactions are probably important factors explaining present-day forest composition.
+
+``` r
+library(ggplot2)
+uses<-read.csv2("uses.csv")
+uses_t<-data.frame(species=uses$X...genre_espece, Crafts=uses$Artisanat, Construction=uses$Construction, Firewood=uses$Feu, Food=uses$Alimentation, Medicine=uses$M..d.Mag)
+data_uses<-merge(data,uses_t, by.x="species", by.y="species", all.x=F, all.y=F)
+data_uses[data_uses$Crafts>0,]$Crafts<-1
+data_uses[data_uses$Construction>0,]$Construction<-1
+data_uses[data_uses$Firewood>0,]$Firewood<-1
+data_uses[data_uses$Food>0,]$Food<-1
+data_uses[data_uses$Medicine>0,]$Medicine<-1
+tab$Crafts<-as.numeric(tapply(data_uses$Crafts,data_uses$Libelle,sum))/
+  as.numeric(tapply(data_uses$Crafts,data_uses$Libelle,length))
+tab$Construction<-as.numeric(tapply(data_uses$Construction,data_uses$Libelle,sum))/
+  as.numeric(tapply(data_uses$Construction,data_uses$Libelle,length))
+tab$Firewood<-as.numeric(tapply(data_uses$Firewood,data_uses$Libelle,sum))/
+  as.numeric(tapply(data_uses$Firewood,data_uses$Libelle,length))
+tab$Food<-as.numeric(tapply(data_uses$Food,data_uses$Libelle,sum))/
+  as.numeric(tapply(data_uses$Food,data_uses$Libelle,length))
+tab$Medicine<-as.numeric(tapply(data_uses$Medicine,data_uses$Libelle,sum))/
+  as.numeric(tapply(data_uses$Medicine,data_uses$Libelle,length))
+data_use<-data.frame(var=c(rep("Crafts",13),rep("Construction",13),rep("Firewood",13), rep("Food",13), rep("Medicine",13)),value=c(tab$Crafts,tab$Construction,tab$Firewood,tab$Food, tab$Medicine),type=rep(tab$Type,5))
+var<-levels(data_use$var)
+data_use$var<-as.character(data_use$var)
+for (i in var){
+test<-round(wilcox.test(data_use[data_use$var==i & data_use$type=="AAP",]$value,
+             data_use[data_use$var==i & data_use$type=="ANP",]$value)$p.value,3)
+ data_use[data_use$var== i,]$var<-paste(i," (P=", test, ")", sep="")}
+p <- ggplot(data = data_use, aes(x=var, y=value)) + 
+   geom_boxplot(aes(fill=type)) +
+   theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
+   coord_flip()
+ p + facet_wrap( ~ var, scales="free")
+```
+
+![](CouacAnalyses_files/figure-markdown_github/uses-1.png)
+
 ### Plant parts
