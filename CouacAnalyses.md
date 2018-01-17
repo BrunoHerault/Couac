@@ -388,14 +388,14 @@ tab$Food<-as.numeric(tapply(data_uses$Food,data_uses$Libelle,sum))/
   as.numeric(tapply(data_uses$Food,data_uses$Libelle,length))
 tab$Medicine<-as.numeric(tapply(data_uses$Medicine,data_uses$Libelle,sum))/
   as.numeric(tapply(data_uses$Medicine,data_uses$Libelle,length))
-data_use<-data.frame(var=c(rep("Crafts",13),rep("Construction",13),rep("Firewood",13), rep("Food",13), rep("Medicine",13)),value=c(tab$Crafts,tab$Construction,tab$Firewood,tab$Food, tab$Medicine),type=rep(tab$Type,5))
+data_use<-data.frame(var=c(rep("Crafts",13),rep("Construction",13),rep("Firewood",13), rep("Food",13), rep("Medicine",13)),Use_Value=c(tab$Crafts,tab$Construction,tab$Firewood,tab$Food, tab$Medicine),type=rep(tab$Type,5))
 var<-levels(data_use$var)
 data_use$var<-as.character(data_use$var)
 for (i in var){
-test<-round(wilcox.test(data_use[data_use$var==i & data_use$type=="AAP",]$value,
-             data_use[data_use$var==i & data_use$type=="ANP",]$value)$p.value,3)
+test<-round(wilcox.test(data_use[data_use$var==i & data_use$type=="AAP",]$Use_Value,
+             data_use[data_use$var==i & data_use$type=="ANP",]$Use_Value)$p.value,3)
  data_use[data_use$var== i,]$var<-paste(i," (P=", test, ")", sep="")}
-p <- ggplot(data = data_use, aes(x=var, y=value)) + 
+p <- ggplot(data = data_use, aes(x=var, y=Use_Value)) + 
    geom_boxplot(aes(fill=type)) +
    theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
    coord_flip()
