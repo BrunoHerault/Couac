@@ -22,6 +22,8 @@ Bruno Hérault
         -   [Forest Structure](#forest-structure-1)
         -   [Forest Composition](#forest-composition-1)
         -   [Forest Diversity](#forest-diversity-1)
+    -   [Ethnobotanical Analysis](#ethnobotanical-analysis-1)
+        -   [Traditional uses](#traditional-uses-1)
         -   [Plant parts](#plant-parts-1)
 
 ``` r
@@ -355,6 +357,11 @@ for (i in 2:13){
 
 ![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
 
-*Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).* \#\# Ethnobotanical Analysis \#\#\# Traditional uses
+*Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).*
+
+Ethnobotanical Analysis
+-----------------------
+
+### Traditional uses
 
 ### Plant parts
