@@ -18,10 +18,11 @@ Bruno Hérault
         -   [Plant parts](#plant-parts)
         -   [Statistical Analyses](#statistical-analyses)
 -   [Results](#results)
-    -   [Effect of past-anthropization on tree assemblages](#effect-of-past-anthropization-on-tree-assemblages-1)
+    -   [Effects of past-anthropization on tree assemblages](#effects-of-past-anthropization-on-tree-assemblages)
         -   [Forest Structure](#forest-structure-1)
         -   [Forest Composition](#forest-composition-1)
         -   [Forest Diversity](#forest-diversity-1)
+        -   [Plant parts](#plant-parts-1)
 
 ``` r
 knitr::opts_chunk$set(echo = TRUE)
@@ -180,8 +181,8 @@ Results
 
 *The archeological diagnosis part, as currently written, should be moved to supplementary materials*
 
-Effect of past-anthropization on tree assemblages
--------------------------------------------------
+Effects of past-anthropization on tree assemblages
+--------------------------------------------------
 
 ### Forest Structure
 
@@ -354,4 +355,6 @@ for (i in 2:13){
 
 ![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
 
-*Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).*
+*Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).* \#\# Ethnobotanical Analysis \#\#\# Traditional uses
+
+### Plant parts
