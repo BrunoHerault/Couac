@@ -1,7 +1,7 @@
-CouacAnalyses
+Please leave this place as clean as you found it... Long term influence of early human occupations on tree assemblages in interfluvial French Guianese forests
 ================
-Bruno Hérault
-12/16/2017
+Bruno Hérault & co
+01/16/2018
 
 -   [Materials and Methods](#materials-and-methods)
     -   [Sampled forests](#sampled-forests)
@@ -361,6 +361,8 @@ for (i in 2:13){
 
 Ethnobotanical Analysis
 -----------------------
+
+*to be eventually updated* Among the different species, 47.7 % (218/457) are used for crafts, 32.8 % (150/457) as building material, 27.8 % (127/457) for medicinal/magical use, 27.6 % (126/457) are used as firewood and 26.7 % (122) produce plant parts edible for humans. Considering the parts used, the most frequent use is of the wood (58.9 %; 269/457). Seeds and/or fruits are used for 58.9 % (140/457), bark for 25.2 % (115/457), exudates for 10.3 % (47/457), leaves and/or flowers for 6.8 % (31/457) and roots or other underground parts for 0.9 % (4/457).
 
 ### Traditional uses
 
