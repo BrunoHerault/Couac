@@ -405,3 +405,43 @@ p <- ggplot(data = data_use, aes(x=var, y=Use_Value)) +
 ![](CouacAnalyses_files/figure-markdown_github/uses-1.png)
 
 ### Plant parts
+
+As for section 3.3.2, an ANOVA was performed in order to detect relationships between the parts potentially used for each plant and species composition of plots. The trends observed are shown in figure 7. Plants with useful seeds and fruits (p &lt; 0.02), leaves and flowers (p &lt; 0.03), underground organs (p &lt; 0.12) and exudates (p &lt; 0.17) were, at diverse scales, more often present on AAPs than on ANPs. The most striking difference concerned species with useful seeds and fruits. Conversely, an increase in the abundance of plants used for their bark (p &lt; 0.06) and to a lesser extent of those used for their wood and stems (p &lt; 0.29) was observed for the ANPs. The different patterns observed appear to support the hypothesis that pre-Columbian humans had a long-term influence on present day patterns of biodiversity.
+
+``` r
+library(ggplot2)
+parts_t<-data.frame(species=uses$X...genre_espece, Bark=uses$Ecorces, Exsudates= uses$Exsudats, Fruits=uses$Graines_Fruits, Leaves=uses$Feuilles_Fleurs, Underground=uses$Org.St, Wood=uses$Bois_Tiges)
+data_parts<-merge(data,parts_t, by.x="species", by.y="species", all.x=F, all.y=F)
+data_parts[data_parts$Bark>0,]$Bark<-1
+data_parts[data_parts$Exsudates>0,]$Exsudates<-1
+data_parts[data_parts$Fruits>0,]$Fruits<-1
+data_parts[data_parts$Leaves>0,]$Leaves<-1
+data_parts[data_parts$Underground>0,]$Underground<-1
+data_parts[data_parts$Wood>0,]$Wood<-1
+tab$Bark<-as.numeric(tapply(data_parts$Bark,data_parts$Libelle,sum))/
+  as.numeric(tapply(data_parts$Bark,data_parts$Libelle,length))
+tab$Exsudates<-as.numeric(tapply(data_parts$Exsudates,data_parts$Libelle,sum))/
+  as.numeric(tapply(data_parts$Exsudates,data_parts$Libelle,length))
+tab$Fruits<-as.numeric(tapply(data_parts$Fruits,data_parts$Libelle,sum))/
+  as.numeric(tapply(data_parts$Fruits,data_parts$Libelle,length))
+tab$Leaves<-as.numeric(tapply(data_parts$Leaves,data_parts$Libelle,sum))/
+  as.numeric(tapply(data_parts$Leaves,data_parts$Libelle,length))
+tab$Underground<-as.numeric(tapply(data_parts$Underground,data_parts$Libelle,sum))/
+  as.numeric(tapply(data_parts$Underground,data_parts$Libelle,length))
+tab$Wood<-as.numeric(tapply(data_parts$Wood,data_parts$Libelle,sum))/
+  as.numeric(tapply(data_parts$Wood,data_parts$Libelle,length))
+data_part<-data.frame(var=c(rep("Bark",13),rep("Exsudates",13),rep("Fruits",13), rep("Leaves",13), rep("Underground",13), rep("Wood",13)),Part=c(tab$Bark,tab$Exsudates,tab$Fruits,tab$Leaves, tab$Underground, tab$Wood),type=rep(tab$Type,6))
+var<-levels(data_part$var)
+data_part$var<-as.character(data_part$var)
+for (i in var){
+test<-round(wilcox.test(data_part[data_part$var==i & data_part$type=="AAP",]$Part,
+             data_part[data_part$var==i & data_part$type=="ANP",]$Part)$p.value,3)
+ data_part[data_part$var== i,]$var<-paste(i," (P=", test, ")", sep="")}
+p <- ggplot(data = data_part, aes(x=var, y=Part)) + 
+   geom_boxplot(aes(fill=type)) +
+   theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
+   coord_flip()
+ p + facet_wrap( ~ var, scales="free")
+```
+
+![](CouacAnalyses_files/figure-markdown_github/parts-1.png)
