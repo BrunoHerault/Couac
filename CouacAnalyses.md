@@ -25,6 +25,9 @@ Bruno Hérault & co
     -   [Ethnobotanical Analysis](#ethnobotanical-analysis-1)
         -   [Traditional uses](#traditional-uses-1)
         -   [Plant parts](#plant-parts-1)
+-   [Supplementary materials](#supplementary-materials)
+    -   [Effects on anthropization on Botanical Families](#effects-on-anthropization-on-botanical-families)
+    -   [Indicator Species in anthropized AAP plots](#indicator-species-in-anthropized-aap-plots)
 
 ``` r
 knitr::opts_chunk$set(echo = TRUE)
@@ -70,7 +73,7 @@ tab<-data.frame("Plot_Name"=names(table(data$Libelle)),
                 "N_genera"=as.numeric(summary(tapply(data$Genre,data$Libelle,unique))[,1]),
                 "N_species"=as.numeric(summary(tapply(data$idTaxon,data$Libelle,unique))[,1]),
                 "Perc_Determination"=round(100-as.numeric(table(data[data$Espece=="Indet.",]$Libelle)/table(data$Libelle)*100),2),
-                "Plot_Area"=c(1,1, 0.80, "NA", 1.83, "NA",1,1,1.56,1,1,1,1),
+                "Plot_Area"=c(1,1, 0.80, 9, 1.83, "NA",1,1,1.56,1,1,1,1),
                 "Type"=c("AAP","ANP","AAP","AAP","AAP","AAP","ANP","ANP","ANP","ANP","ANP","ANP","ANP"))
 tab[tab$Plot_Name=="Mcwila",]$N_species=length(unique(paste(data[data$Libelle=="Mcwila",]$Genre,data[data$Libelle=="Mcwila",]$Espece)))
 tab$Plot_Area<-as.numeric(as.character(tab$Plot_Area))
@@ -88,7 +91,7 @@ kable(tab)
 | Aca        |       454|         42|         93|         148|                95.59|      1.0000| AAP  |
 | Baf        |       756|         39|        106|         183|                93.65|      1.0000| ANP  |
 | EpBar      |       425|         39|         99|         164|                83.76|      0.8000| AAP  |
-| FC         |       766|         44|        113|         225|                98.04|          NA| AAP  |
+| FC         |       766|         44|        113|         225|                98.04|      9.0000| AAP  |
 | MC87       |       824|         44|        126|         276|                89.56|      1.8300| AAP  |
 | Mcwila     |       654|         41|        103|         173|                98.32|      1.1704| AAP  |
 | NouGP      |       536|         43|        104|         169|                89.37|      1.0000| ANP  |
@@ -229,6 +232,8 @@ p + facet_wrap( ~ var, scales="free")
 
 ### Forest Composition
 
+#### Neutral composition
+
 AAPs and ANPs plots are well separated along the 1st axis of the DCA (figure 2). AAP sites were grouped towards the right side of the axis 1 that represents 35% of the observed variation in species composition. Past human occupation is thus the main source of differences in species composition among our sampled plots.
 
 ``` r
@@ -253,87 +258,33 @@ text(x, y, tab$Plot_Name, pos=4)
 
 *Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAPs (black) or ANPs (red).*
 
-#### Botanical Families
-
-The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Only three families had clear patterns of segregation (*P* &lt; 0.05). These are Arecaceae, Burseraceae and Lauraceae that are significantly more frequent in AAPs. On the other hand, Apocynaceae and Lecythidaceae are marginally (*P*&lt;0.1) less frequent in AAPs.
+#### Functional composition
 
 ``` r
 library(ggplot2)
-data_fam<-data[data$Famille %in% names(sort(table(data$Famille),decreasing = T))[1:20],]
-data_fam$Famille<-as.factor(as.character(data_fam$Famille))
-data_fam<-as.data.frame(table(data_fam$Libelle,data_fam$Famille)/rowSums(table(data_fam$Libelle,data_fam$Famille)))
-data_fam<-merge(data_fam,tab, by.x="Var1", by.y="Plot_Name")
-data_fam$Sites<-data_fam$Var1
-fam<-levels(data_fam$Var2)
-data_fam$Var2<-as.character(data_fam$Var2)
-for (i in fam){
-test<-round(wilcox.test(data_fam[data_fam$Var2==i & data_fam$Type=="AAP",]$Freq,
-            data_fam[data_fam$Var2==i & data_fam$Type=="ANP",]$Freq)$p.value,2)
-data_fam[data_fam$Var2== i,]$Var2<-paste(i," (P=", test, ")", sep="")}
-p <- ggplot(data = data_fam, aes(x=Var2, y=Freq)) + 
-  geom_boxplot(aes(fill=Type)) +
-  theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
-  labs(y = "Relative Frequencies") +
-  coord_flip()
-p + facet_wrap( ~ Var2, scales="free")
+traits<-read.csv2("TraitsAll.csv")
+data_traits<-merge(data,traits, by.x="species", by.y="Taxon", all.x=F, all.y=F)
+tab$WD<-as.numeric(tapply(data_traits$wd,data_traits$Libelle,mean))
+tab$SLA<-as.numeric(tapply(data_traits$SLA,data_traits$Libelle,mean, na.rm=T))
+tab$Seed<-as.numeric(tapply(data_traits$Seed,data_traits$Libelle,mean, na.rm=T))
+tab$Height<-as.numeric(tapply(data_traits$Height,data_traits$Libelle,mean, na.rm=T))
+data_trait<-data.frame(var=c(rep("Wood Density",13),rep("Specific Leaf Area",13),rep("Seed Mass",13), rep("Height",13)),Trait_Value=c(tab$WD,tab$SLA,tab$Seed,tab$Height),type=rep(tab$Type,4))
+var<-levels(as.factor(data_trait$var))
+data_trait$var<-as.character(data_trait$var)
+for (i in var){
+test<-round(wilcox.test(data_trait[data_trait$var==i & data_trait$type=="AAP",]$Trait_Value,
+             data_trait[data_trait$var==i & data_trait$type=="ANP",]$Trait_Value)$p.value,3)
+ data_trait[data_trait$var== i,]$var<-paste(i," (P=", test, ")", sep="")}
+p <- ggplot(data = data_trait, aes(x=var, y=Trait_Value)) + 
+   geom_boxplot(aes(fill=type)) +
+   theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
+   coord_flip()
+ p + facet_wrap( ~ var, scales="free")
 ```
 
-![](CouacAnalyses_files/figure-markdown_github/fam-1.png)
+![](CouacAnalyses_files/figure-markdown_github/traits-1.png)
 
-*Relative frequencies of the 20 most abundant families in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP). Wilcoxon Rank test of significance.*
-
-#### Indicator Species
-
-The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. *Pourouma minor*, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
-
-``` r
-library(indicspecies)
-#IS<-multipatt(as.data.frame.matrix(data_dca),cluster=as.numeric(tab$Type),duleg=T) # save time
-#save(IS,file="IS.Rdata")
-load("IS.Rdata")
-indic<-data.frame(Species=colnames(data_dca)[IS$sign[,5]<0.05],
-                  Indicator=IS$sign$index[IS$sign[,5]<0.05],
-                  Strength=round(IS$str[IS$sign[,5]<0.05,1],3),
-                  Pvalue=round(IS$sign$p.value[IS$sign[,5]<0.05],3))
-indic<-indic[!indic$Species =="Indet.Lauraceae sp.6",]
-fam<-unique(data.frame(Species=data[data$species %in% rownames(indic),]$species, Family=data[data$species %in% rownames(indic),]$Famille))
-indic<-merge(indic,fam)
-indic<-data.frame(Family=indic$Family,Species=indic$Species,Indicator=indic$Indicator, Strength=indic$Strength,Pvalue=indic$Pvalue)
-indic[indic$Indicator==2,]$Indicator<-"ANP"
-indic[indic$Indicator==1,]$Indicator<-"AAP"
-indic[indic$Strength<0.5,]$Strength<-1-indic[indic$Strength<0.5,]$Strength
-indic<-indic[order(indic$Indicator),]
-indic<-indic[-8,]
-rownames(indic)<-NULL
-kable(indic)
-```
-
-| Family          | Species                 | Indicator |  Strength|  Pvalue|
-|:----------------|:------------------------|:----------|---------:|-------:|
-| Euphorbiaceae   | Aparisthmium cordatum   | AAP       |     0.775|   0.040|
-| Arecaceae       | Astrocaryum sciophilum  | AAP       |     0.911|   0.020|
-| Fabaceae        | Batesia floribunda      | AAP       |     0.775|   0.040|
-| Euphorbiaceae   | Conceveiba guianensis   | AAP       |     0.870|   0.020|
-| Meliaceae       | Guarea gomma            | AAP       |     0.775|   0.040|
-| Fabaceae        | Inga alba               | AAP       |     0.857|   0.020|
-| Lauraceae       | Licaria martiniana      | AAP       |     0.861|   0.040|
-| Arecaceae       | Oenocarpus bacaba       | AAP       |     0.873|   0.015|
-| Urticaceae      | Pourouma minor          | AAP       |     0.770|   0.015|
-| Burseraceae     | Protium apiculatum      | AAP       |     0.838|   0.030|
-| Burseraceae     | Protium decandrum       | AAP       |     0.826|   0.045|
-| Burseraceae     | Protium trifoliolatum   | AAP       |     0.963|   0.010|
-| Humiriaceae     | Sacoglottis cydonioides | AAP       |     0.843|   0.020|
-| Anacardiaceae   | Thyrsodium spruceanum   | AAP       |     0.737|   0.045|
-| Apocynaceae     | Aspidosperma album      | ANP       |     1.000|   0.030|
-| Rubiaceae       | Chimarrhis turbinata    | ANP       |     0.847|   0.045|
-| Lecythidaceae   | Couratari multiflora    | ANP       |     1.000|   0.015|
-| Lecythidaceae   | Gustavia hexapetala     | ANP       |     0.740|   0.020|
-| Lecythidaceae   | Lecythis persistens     | ANP       |     0.729|   0.005|
-| Melastomataceae | Mouriri crassifolia     | ANP       |     1.000|   0.020|
-| Simaroubaceae   | Simaba cedron           | ANP       |     1.000|   0.020|
-| Fabaceae        | Swartzia polyphylla     | ANP       |     0.861|   0.045|
-
-*Indicator species in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP), Families, Botanical names, Strength of the Association and P values.*
+*Comparison of the average trait values between AAP and ANP plots*
 
 ### Forest Diversity
 
@@ -356,6 +307,10 @@ for (i in 2:13){
 ```
 
 ![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
+
+``` r
+data_tree<-data.frame(species=unique(data$species))
+```
 
 *Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).*
 
@@ -445,3 +400,90 @@ p <- ggplot(data = data_part, aes(x=var, y=Part)) +
 ```
 
 ![](CouacAnalyses_files/figure-markdown_github/parts-1.png)
+
+Supplementary materials
+=======================
+
+Effects on anthropization on Botanical Families
+-----------------------------------------------
+
+The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Only three families had clear patterns of segregation (*P* &lt; 0.05). These are Arecaceae, Burseraceae and Lauraceae that are significantly more frequent in AAPs. On the other hand, Apocynaceae and Lecythidaceae are marginally (*P*&lt;0.1) less frequent in AAPs.
+
+``` r
+library(ggplot2)
+data_fam<-data[data$Famille %in% names(sort(table(data$Famille),decreasing = T))[1:20],]
+data_fam$Famille<-as.factor(as.character(data_fam$Famille))
+data_fam<-as.data.frame(table(data_fam$Libelle,data_fam$Famille)/rowSums(table(data_fam$Libelle,data_fam$Famille)))
+data_fam<-merge(data_fam,tab, by.x="Var1", by.y="Plot_Name")
+data_fam$Sites<-data_fam$Var1
+fam<-levels(data_fam$Var2)
+data_fam$Var2<-as.character(data_fam$Var2)
+for (i in fam){
+test<-round(wilcox.test(data_fam[data_fam$Var2==i & data_fam$Type=="AAP",]$Freq,
+            data_fam[data_fam$Var2==i & data_fam$Type=="ANP",]$Freq)$p.value,2)
+data_fam[data_fam$Var2== i,]$Var2<-paste(i," (P=", test, ")", sep="")}
+p <- ggplot(data = data_fam, aes(x=Var2, y=Freq)) + 
+  geom_boxplot(aes(fill=Type)) +
+  theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
+  labs(y = "Relative Frequencies") +
+  coord_flip()
+p + facet_wrap( ~ Var2, scales="free")
+```
+
+![](CouacAnalyses_files/figure-markdown_github/fam-1.png)
+
+*Relative frequencies of the 20 most abundant families in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP). Wilcoxon Rank test of significance.*
+
+Indicator Species in anthropized AAP plots
+------------------------------------------
+
+The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. *Pourouma minor*, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
+
+``` r
+library(indicspecies)
+#IS<-multipatt(as.data.frame.matrix(data_dca),cluster=as.numeric(tab$Type),duleg=T) # save time
+#save(IS,file="IS.Rdata")
+load("IS.Rdata")
+indic<-data.frame(Species=colnames(data_dca)[IS$sign[,5]<0.05],
+                  Indicator=IS$sign$index[IS$sign[,5]<0.05],
+                  Strength=round(IS$str[IS$sign[,5]<0.05,1],3),
+                  Pvalue=round(IS$sign$p.value[IS$sign[,5]<0.05],3))
+indic<-indic[!indic$Species =="Indet.Lauraceae sp.6",]
+fam<-unique(data.frame(Species=data[data$species %in% rownames(indic),]$species, Family=data[data$species %in% rownames(indic),]$Famille))
+indic<-merge(indic,fam)
+indic<-data.frame(Family=indic$Family,Species=indic$Species,Indicator=indic$Indicator, Strength=indic$Strength,Pvalue=indic$Pvalue)
+indic[indic$Indicator==2,]$Indicator<-"ANP"
+indic[indic$Indicator==1,]$Indicator<-"AAP"
+indic[indic$Strength<0.5,]$Strength<-1-indic[indic$Strength<0.5,]$Strength
+indic<-indic[order(indic$Indicator),]
+indic<-indic[-8,]
+rownames(indic)<-NULL
+kable(indic)
+```
+
+| Family          | Species                 | Indicator |  Strength|  Pvalue|
+|:----------------|:------------------------|:----------|---------:|-------:|
+| Euphorbiaceae   | Aparisthmium cordatum   | AAP       |     0.775|   0.040|
+| Arecaceae       | Astrocaryum sciophilum  | AAP       |     0.911|   0.020|
+| Fabaceae        | Batesia floribunda      | AAP       |     0.775|   0.040|
+| Euphorbiaceae   | Conceveiba guianensis   | AAP       |     0.870|   0.020|
+| Meliaceae       | Guarea gomma            | AAP       |     0.775|   0.040|
+| Fabaceae        | Inga alba               | AAP       |     0.857|   0.020|
+| Lauraceae       | Licaria martiniana      | AAP       |     0.861|   0.040|
+| Arecaceae       | Oenocarpus bacaba       | AAP       |     0.873|   0.015|
+| Urticaceae      | Pourouma minor          | AAP       |     0.770|   0.015|
+| Burseraceae     | Protium apiculatum      | AAP       |     0.838|   0.030|
+| Burseraceae     | Protium decandrum       | AAP       |     0.826|   0.045|
+| Burseraceae     | Protium trifoliolatum   | AAP       |     0.963|   0.010|
+| Humiriaceae     | Sacoglottis cydonioides | AAP       |     0.843|   0.020|
+| Anacardiaceae   | Thyrsodium spruceanum   | AAP       |     0.737|   0.045|
+| Apocynaceae     | Aspidosperma album      | ANP       |     1.000|   0.030|
+| Rubiaceae       | Chimarrhis turbinata    | ANP       |     0.847|   0.045|
+| Lecythidaceae   | Couratari multiflora    | ANP       |     1.000|   0.015|
+| Lecythidaceae   | Gustavia hexapetala     | ANP       |     0.740|   0.020|
+| Lecythidaceae   | Lecythis persistens     | ANP       |     0.729|   0.005|
+| Melastomataceae | Mouriri crassifolia     | ANP       |     1.000|   0.020|
+| Simaroubaceae   | Simaba cedron           | ANP       |     1.000|   0.020|
+| Fabaceae        | Swartzia polyphylla     | ANP       |     0.861|   0.045|
+
+*Indicator species in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP), Families, Botanical names, Strength of the Association and P values.*
