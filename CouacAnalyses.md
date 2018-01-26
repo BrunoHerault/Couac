@@ -309,7 +309,31 @@ for (i in 2:13){
 ![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
 
 ``` r
-data_tree<-data.frame(species=unique(data$species))
+# data_tree<-data.frame(name=unique(data$species))
+# library(stringr)
+# data_tree$genus<-str_split_fixed(data_tree$name, " ", 2)[,1]
+# data_tree$species<-str_split_fixed(data_tree$name, " ", 2)[,2]
+# library(BIOMASS)
+# data_tree$wd<-getWoodDensity(data_tree$genus,data_tree$species)$meanWD
+# data_tree<-merge(data_tree,traits, by.x="name", by.y="Taxon", all.x=T, all.y=F)
+# test<-tapply(data_tree$Seed,data_tree$genus,mean,na.rm=T)
+# for (i in 1:dim(data_tree)[1])
+# {if (is.na(data_tree$Seed[i])==T)  {data_tree$Seed[i]<-test[data_tree$genus[i] == names(test)]}
+# }
+# test<-tapply(data_tree$SLA,data_tree$genus,mean,na.rm=T)
+# for (i in 1:dim(data_tree)[1])
+# {if (is.na(data_tree$SLA[i])==T)  {data_tree$SLA[i]<-test[data_tree$genus[i] == names(test)]}
+# }
+# test<-tapply(data_tree$Height,data_tree$genus,mean,na.rm=T)
+# for (i in 1:dim(data_tree)[1])
+# {if (is.na(data_tree$Height[i])==T)  {data_tree$Height[i]<-test[data_tree$genus[i] == names(test)]}
+#   }
+# data<-merge(data,data_tree, by.x="species", by.y="name", all.x=T, all.y=F) # 18% of missing values, we first use phylo conserv and then MICE to fill in
+#library(mice)
+#summary(data_tree)
+#data_tree<-complete(mice(data_tree, m=20))
+#save(data_tree, file="data_tree.R")
+load("data_tree.R")
 ```
 
 *Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).*
