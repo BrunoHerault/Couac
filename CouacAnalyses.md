@@ -25,9 +25,11 @@ Bruno Hérault & co
     -   [Ethnobotanical Analysis](#ethnobotanical-analysis-1)
         -   [Traditional uses](#traditional-uses-1)
         -   [Plant parts](#plant-parts-1)
+        -   [Use values and spatial diversity](#use-values-and-spatial-diversity)
 -   [Supplementary materials](#supplementary-materials)
     -   [Effects on anthropization on Botanical Families](#effects-on-anthropization-on-botanical-families)
     -   [Indicator Species in anthropized AAP plots](#indicator-species-in-anthropized-aap-plots)
+    -   [Effects on anthropization on Forest diversity](#effects-on-anthropization-on-forest-diversity)
 
 ``` r
 knitr::opts_chunk$set(echo = TRUE)
@@ -288,55 +290,7 @@ p <- ggplot(data = data_trait, aes(x=var, y=Trait_Value)) +
 
 ### Forest Diversity
 
-Alpha diversities were assessed for each plot through their diversity profiles that allow to tract the relative importance of rare species in shaping the the plot ranking. Generally, all plots (AAPs and ANPs) share a similar decreasing pattern of diversity. Nevertheless, for q = 0 (species richness),the anthropized plots AAP tend to have higher diversity (Wilcoxon tests, P=0.12) but the weak signal disappears with increasing q (P=0.43 for q=1, P=0.72 for q=2).
-
-``` r
-library(entropart)
-meta<-MetaCommunity(t(data_dca))
-Profile <- DivProfile(q.seq = seq(0, 3, 0.03), meta, Biased = FALSE)
-q0<-wilcox.test(Profile$CommunityAlphaDiversities[1,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[1,as.numeric(tab$Type)==2])
-q1<-wilcox.test(Profile$CommunityAlphaDiversities[33,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[33,as.numeric(tab$Type)==2])
-q2<-wilcox.test(Profile$CommunityAlphaDiversities[67,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[67,as.numeric(tab$Type)==2])
-plot(rownames(Profile$CommunityAlphaDiversities),Profile$CommunityAlphaDiversities[,1], type="l", col="red", ylab="Alpha Diversity", xlab="Diversity Order q", lty=2, ylim=c(0,450))
-color<-as.character(tab$Type)
-color[color=="AAP"]<-"red"
-color[color=="ANP"]<-"black"
-for (i in 2:13){
-  points(rownames(Profile$CommunityAlphaDiversities),Profile$CommunityAlphaDiversities[,i], type="l", lty=((-as.numeric(tab$Type)+3)[i]), col=color[i])
-}
-```
-
-![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
-
-``` r
-# data_tree<-data.frame(name=unique(data$species))
-# library(stringr)
-# data_tree$genus<-str_split_fixed(data_tree$name, " ", 2)[,1]
-# data_tree$species<-str_split_fixed(data_tree$name, " ", 2)[,2]
-# library(BIOMASS)
-# data_tree$wd<-getWoodDensity(data_tree$genus,data_tree$species)$meanWD
-# data_tree<-merge(data_tree,traits, by.x="name", by.y="Taxon", all.x=T, all.y=F)
-# test<-tapply(data_tree$Seed,data_tree$genus,mean,na.rm=T)
-# for (i in 1:dim(data_tree)[1])
-# {if (is.na(data_tree$Seed[i])==T)  {data_tree$Seed[i]<-test[data_tree$genus[i] == names(test)]}
-# }
-# test<-tapply(data_tree$SLA,data_tree$genus,mean,na.rm=T)
-# for (i in 1:dim(data_tree)[1])
-# {if (is.na(data_tree$SLA[i])==T)  {data_tree$SLA[i]<-test[data_tree$genus[i] == names(test)]}
-# }
-# test<-tapply(data_tree$Height,data_tree$genus,mean,na.rm=T)
-# for (i in 1:dim(data_tree)[1])
-# {if (is.na(data_tree$Height[i])==T)  {data_tree$Height[i]<-test[data_tree$genus[i] == names(test)]}
-#   }
-# data<-merge(data,data_tree, by.x="species", by.y="name", all.x=T, all.y=F) # 18% of missing values, we first use phylo conserv and then MICE to fill in
-#library(mice)
-#summary(data_tree)
-#data_tree<-complete(mice(data_tree, m=20))
-#save(data_tree, file="data_tree.R")
-load("data_tree.R")
-```
-
-*Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).*
+Alpha diversities were assessed for each plot through their neutral and functional diversity profiles that allow to tract the relative importance of rare species in shaping the the plot ranking. Generally, all plots (AAPs and ANPs) share a similar decreasing pattern of diversity. Nevertheless, for q = 0 (species richness),the anthropized plots AAP tend to have higher neutral diversity (Wilcoxon tests, P=0.12) but the weak signal disappears with increasing q (P=0.43 for q=1, P=0.72 for q=2). Nothing was detected for functional diversity (see Supp Mat .
 
 Ethnobotanical Analysis
 -----------------------
@@ -425,6 +379,10 @@ p <- ggplot(data = data_part, aes(x=var, y=Part)) +
 
 ![](CouacAnalyses_files/figure-markdown_github/parts-1.png)
 
+### Use values and spatial diversity
+
+As for section 3.3.2, an ANOVA was performed in order to detect relationships between the parts potentially used for each plant and species composition of plots. The trends observed are shown in figure 7. Plants with useful seeds and fruits (p &lt; 0.02), leaves and flowers (p &lt; 0.03), underground organs (p &lt; 0.12) and exudates (p &lt; 0.17) were, at diverse scales, more often present on AAPs than on ANPs. The most striking difference concerned species with useful seeds and fruits. Conversely, an increase in the abundance of plants used for their bark (p &lt; 0.06) and to a lesser extent of those used for their wood and stems (p &lt; 0.29) was observed for the ANPs. The different patterns observed appear to support the hypothesis that pre-Columbian humans had a long-term influence on present day patterns of biodiversity.
+
 Supplementary materials
 =======================
 
@@ -511,3 +469,73 @@ kable(indic)
 | Fabaceae        | Swartzia polyphylla     | ANP       |     0.861|   0.045|
 
 *Indicator species in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP), Families, Botanical names, Strength of the Association and P values.*
+
+Effects on anthropization on Forest diversity
+---------------------------------------------
+
+``` r
+library(entropart)
+meta<-MetaCommunity(t(data_dca))
+Profile <- DivProfile(q.seq = seq(0, 3, 0.03), meta, Biased = FALSE)
+q0<-wilcox.test(Profile$CommunityAlphaDiversities[1,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[1,as.numeric(tab$Type)==2])
+q1<-wilcox.test(Profile$CommunityAlphaDiversities[33,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[33,as.numeric(tab$Type)==2])
+q2<-wilcox.test(Profile$CommunityAlphaDiversities[67,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[67,as.numeric(tab$Type)==2])
+par(mfrow=c(1,2), las=1)
+plot(rownames(Profile$CommunityAlphaDiversities),Profile$CommunityAlphaDiversities[,1], type="l", col="red", ylab="Neutral Alpha Diversity", xlab="Diversity Order q", lty=2, ylim=c(0,450))
+color<-as.character(tab$Type)
+color[color=="AAP"]<-"red"
+color[color=="ANP"]<-"black"
+for (i in 2:13){
+  points(rownames(Profile$CommunityAlphaDiversities),Profile$CommunityAlphaDiversities[,i], type="l", lty=((-as.numeric(tab$Type)+3)[i]), col=color[i])
+}
+# data_tree<-data.frame(name=unique(data$species))
+# library(stringr)
+# data_tree$genus<-str_split_fixed(data_tree$name, " ", 2)[,1]
+# data_tree$species<-str_split_fixed(data_tree$name, " ", 2)[,2]
+# library(BIOMASS)
+# data_tree$wd<-getWoodDensity(data_tree$genus,data_tree$species)$meanWD
+# data_tree<-merge(data_tree,traits, by.x="name", by.y="Taxon", all.x=T, all.y=F)
+# test<-tapply(data_tree$Seed,data_tree$genus,mean,na.rm=T)
+# for (i in 1:dim(data_tree)[1])
+# {if (is.na(data_tree$Seed[i])==T)  {data_tree$Seed[i]<-test[data_tree$genus[i] == names(test)]}
+# }
+# test<-tapply(data_tree$SLA,data_tree$genus,mean,na.rm=T)
+# for (i in 1:dim(data_tree)[1])
+# {if (is.na(data_tree$SLA[i])==T)  {data_tree$SLA[i]<-test[data_tree$genus[i] == names(test)]}
+# }
+# test<-tapply(data_tree$Height,data_tree$genus,mean,na.rm=T)
+# for (i in 1:dim(data_tree)[1])
+# {if (is.na(data_tree$Height[i])==T)  {data_tree$Height[i]<-test[data_tree$genus[i] == names(test)]}
+#   }
+# data<-merge(data,data_tree, by.x="species", by.y="name", all.x=T, all.y=F) # 18% of missing values, we first use phylo conserv and then MICE to fill in
+#library(mice)
+#summary(data_tree)
+#data_tree<-complete(mice(data_tree, m=20))
+#save(data_tree, file="data_tree.R")
+load("data_tree.R")
+data_tree$Seed<-as.ordered((data_tree$Seed))
+row.names(data_tree)<-data_tree$name
+data_tree[,1:3]<-NULL
+library(cluster)
+data.daisy <- daisy(data_tree, metric = "gower")
+data.agnes <- agnes(data.daisy, method="ward")
+data_phylo <- as.hclust(data.agnes)
+#Profile_phylo <- DivProfile(q.seq = seq(0, 3, 0.03), MC=meta, Biased = FALSE, Tree=data_phylo)  #maybe try also with a similarity matrix Z because with a tree it's fuzzy and a lot of variance has been lost when building the tree
+#save(Profile_phylo, file="Profile_phylo.R")
+load("Profile_phylo.R")
+#Profile_dqz <- DivProfile(q.seq = seq(0, 3, 0.03), MC=meta, Biased = FALSE, Z=1-as.matrix(data.daisy)) # idem keep with Profile_Phylo
+q0<-wilcox.test(Profile_phylo$CommunityAlphaDiversities[1,as.numeric(tab$Type)==1], x = Profile_phylo$CommunityAlphaDiversities[1,as.numeric(tab$Type)==2])
+q1<-wilcox.test(Profile_phylo$CommunityAlphaDiversities[33,as.numeric(tab$Type)==1], x = Profile_phylo$CommunityAlphaDiversities[33,as.numeric(tab$Type)==2])
+q2<-wilcox.test(Profile_phylo$CommunityAlphaDiversities[67,as.numeric(tab$Type)==1], x = Profile_phylo$CommunityAlphaDiversities[67,as.numeric(tab$Type)==2])
+plot(rownames(Profile_phylo$CommunityAlphaDiversities),Profile_phylo$CommunityAlphaDiversities[,1], type="l", col="red", ylab="Functional Alpha Diversity", xlab="Diversity Order q", lty=2, ylim=c(0,15))
+color<-as.character(tab$Type)
+color[color=="AAP"]<-"red"
+color[color=="ANP"]<-"black"
+for (i in 2:13){
+  points(rownames(Profile_phylo$CommunityAlphaDiversities),Profile_phylo$CommunityAlphaDiversities[,i], type="l", lty=((-as.numeric(tab$Type)+3)[i]), col=color[i])
+}
+```
+
+![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
+
+*Neutral (a) and (b) Functional Diversity profiles of the 5 Apparently Anthropized Plot (AAP, red dotted lines) and Apparently Non-anthropized Plot (ANP, black plain lines).*
