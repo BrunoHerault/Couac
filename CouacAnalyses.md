@@ -1,14 +1,12 @@
 Please leave this place as clean as you found it... Long term influence of early human occupations on tree assemblages in interfluvial French Guianese forests
 ================
-to be decided together
+Hérault, Odonne & co
 01/16/2018
 
 -   [Introduction](#introduction)
 -   [Materials and Methods](#materials-and-methods)
     -   [Sampled forests](#sampled-forests)
     -   [Archaeological diagnosis](#archaeological-diagnosis)
-        -   [Prospection](#prospection)
-        -   [Dating](#dating)
     -   [Effect of past-anthropization on tree assemblages](#effect-of-past-anthropization-on-tree-assemblages)
         -   [Forest Structure](#forest-structure)
         -   [Forest Composition](#forest-composition)
@@ -28,9 +26,15 @@ to be decided together
         -   [Plant parts](#plant-parts-1)
         -   [Use values and spatial diversity](#use-values-and-spatial-diversity)
 -   [Supplementary materials](#supplementary-materials)
-    -   [Effects on anthropization on Botanical Families](#effects-on-anthropization-on-botanical-families)
-    -   [Indicator Species in anthropized AAP plots](#indicator-species-in-anthropized-aap-plots)
-    -   [Effects on anthropization on Forest diversity](#effects-on-anthropization-on-forest-diversity)
+    -   [Archeological Description of the sampled sites](#archeological-description-of-the-sampled-sites)
+        -   [Aca : The Acarouany site](#aca-the-acarouany-site)
+        -   [EpBar: The Eperon Barré site](#epbar-the-eperon-barré-site)
+        -   [FC: The Fortunat Capiri site](#fc-the-fortunat-capiri-site)
+        -   [MC87: The Montagne Couronnée 87 site](#mc87-the-montagne-couronnée-87-site)
+        -   [Mcwila: The XXXXXXX site](#mcwila-the-xxxxxxx-site)
+    -   [Effects on anthropization on abundance of Botanical Families](#effects-on-anthropization-on-abundance-of-botanical-families)
+    -   [Indicator Species of anthropized AAP plots](#indicator-species-of-anthropized-aap-plots)
+    -   [Effects on anthropization on community diversity profiles](#effects-on-anthropization-on-community-diversity-profiles)
 
 ``` r
 knitr::opts_chunk$set(echo = TRUE)
@@ -47,81 +51,32 @@ Materials and Methods
 Sampled forests
 ---------------
 
-This study involved 13 permanent plots, including 12 from the Guyafor network (Grau et al. 2017) distributed throughout the northern two-thirds of French Guiana (Figure 1). All individual trees (≥ 10 cm in diameter at breast height) present in the plots were marked, mapped, measured and botanically identified. The total dataset included 8995 trees. Individuals not determined to the genus level represent 4.02 % of all individuals.
+This study involved 13 permanent plots, including 12 from the Guyafor network (Grau et al. 2017) distributed throughout the northern two-thirds of French Guiana (Figure 1). All individual trees (≥ 10 cm in diameter at breast height) present in the plots were marked, mapped, measured and botanically identified. The total dataset included 7820 trees. Individuals determined to the genus level only represent 4.63 % of all individuals.
 
-``` r
-library(knitr)
-data<-read.csv2("data_v2.csv")
-# data selection
-data<-data[!data$Libelle=="Cplo",]
-data<-data[!data$Libelle=="Lau",]
-data<-data[!data$Libelle=="Tres",]
-#sel<-data[(data$Libelle=="NouPP"),]
-#sel<-sel[(sel$NumCarre=="204"),]
-data<-data[!(data$Libelle=="NouPP"),]
-#data<-rbind(data,sel)
-sel<-data[(data$NomForet=="Montagne Tortue"),]
-sel<-sel[!is.na(sel$X),]
-sel<-sel[(sel$X<=100 & sel$Y<=100),]
-data<-data[!(data$Libelle=="Tort"),]
-data<-rbind(data,sel)
-sel<-data[(data$NomForet=="Trinit_"),]
-sel<-sel[(sel$NumCarre=="1"),]
-data<-data[!(data$Libelle=="Trin"),]
-data<-rbind(data,sel)
-sel<-data[(data$Libelle=="EpBar"),]
-sel<-sel[!is.na(sel$X),]
-sel<-sel[sel$Y>100,]
-data<-data[!(data$Libelle=="EpBar"),]
-data<-rbind(data,sel)
-data$Libelle<-as.factor(as.character(data$Libelle))
-tab<-data.frame("Plot_Name"=names(table(data$Libelle)), 
-                "N_trees"=as.numeric(table(data$Libelle)),
-                "N_family"=as.numeric(summary(tapply(data$Famille,data$Libelle,unique))[,1]),
-                "N_genera"=as.numeric(summary(tapply(data$Genre,data$Libelle,unique))[,1]),
-                "N_species"=as.numeric(summary(tapply(data$idTaxon,data$Libelle,unique))[,1]),
-                "Perc_Determination"=round(100-as.numeric(table(data[data$Espece=="Indet.",]$Libelle)/table(data$Libelle)*100),2),
-                "Plot_Area"=c(1,1, 0.80, 9, 1.83, "NA",1,1,1.56,1,1,1,1),
-                "Type"=c("AAP","ANP","AAP","AAP","AAP","AAP","ANP","ANP","ANP","ANP","ANP","ANP","ANP"))
-tab[tab$Plot_Name=="Mcwila",]$N_species=length(unique(paste(data[data$Libelle=="Mcwila",]$Genre,data[data$Libelle=="Mcwila",]$Espece)))
-tab$Plot_Area<-as.numeric(as.character(tab$Plot_Area))
-```
-
-    ## Warning: NAs introduced by coercion
-
-``` r
-tab[tab$Plot_Name=="Mcwila",]$Plot_Area=max(data[data$Libelle=="Mcwila",]$X)*max(data[data$Libelle=="Mcwila",]$Y)/10000
-kable(tab)
-```
-
-| Plot\_Name |  N\_trees|  N\_family|  N\_genera|  N\_species|  Perc\_Determination|  Plot\_Area| Type |
-|:-----------|---------:|----------:|----------:|-----------:|--------------------:|-----------:|:-----|
-| Aca        |       454|         42|         93|         148|                95.59|      1.0000| AAP  |
-| Baf        |       756|         39|        106|         183|                93.65|      1.0000| ANP  |
-| EpBar      |       425|         39|         99|         164|                83.76|      0.8000| AAP  |
-| FC         |       766|         44|        113|         225|                98.04|      9.0000| AAP  |
-| MC87       |       824|         44|        126|         276|                89.56|      1.8300| AAP  |
-| Mcwila     |       654|         41|        103|         173|                98.32|      1.1704| AAP  |
-| NouGP      |       536|         43|        104|         169|                89.37|      1.0000| ANP  |
-| Par18      |       499|         42|        103|         158|                96.39|      1.0000| ANP  |
-| Par6       |       964|         41|        106|         189|                94.19|      1.5600| ANP  |
-| Slav       |       620|         44|        106|         200|                88.23|      1.0000| ANP  |
-| Tib        |       440|         41|        114|         176|                95.00|      1.0000| ANP  |
-| Tort       |       496|         46|        122|         193|                94.15|      1.0000| ANP  |
-| Trin       |       650|         40|        112|         187|                98.92|      1.0000| ANP  |
+| Plot\_Name |  N\_trees|  N\_family|  N\_genera|  N\_species|  Perc\_Determination|  Plot\_Area| Type | Dating |
+|:-----------|---------:|----------:|----------:|-----------:|--------------------:|-----------:|:-----|:-------|
+| Aca        |       454|         42|         93|         148|                95.59|        1.00| AAP  | NA     |
+| Baf        |       756|         39|        106|         183|                93.65|        1.00| ANP  | NA     |
+| EpBar      |       415|         39|        100|         164|                98.80|        0.80| AAP  | NA     |
+| FC         |       515|         44|        106|         194|                98.83|        1.14| AAP  | NA     |
+| MC87       |       821|         45|        127|         274|                98.78|        1.83| AAP  | NA     |
+| Mcwila     |       654|         41|        103|         173|                98.32|        1.17| AAP  | NA     |
+| NouGP      |       536|         43|        104|         169|                89.37|        1.00| ANP  | NA     |
+| Par18      |       499|         42|        103|         158|                96.39|        1.00| ANP  | NA     |
+| Par6       |       964|         41|        106|         189|                94.19|        1.56| ANP  | NA     |
+| Slav       |       620|         44|        106|         200|                88.23|        1.00| ANP  | NA     |
+| Tib        |       440|         41|        114|         176|                95.00|        1.00| ANP  | NA     |
+| Tort       |       496|         46|        122|         193|                94.15|        1.00| ANP  | NA     |
+| Trin       |       650|         40|        112|         187|                98.92|        1.00| ANP  | NA     |
 
 *Description of the Sampled Plots*
 
 Archaeological diagnosis
 ------------------------
 
-### Prospection
+The surface of each plot was diagnosed by archaeologists. Evidence for pre-Columbian human occupations (such as artifacts, dark soils, earthworks) was searched for in the field, by superficial prospection of the ground surface while walking and carefully examining soils expelled from burrows and mounds resulting from uprooted trees. Exploratory, localized pits were also dug to confirm surface observations and to establish archaeological sequences. This allowed classifying plots as either “Apparently Anthropized Plot” (AAP) or “Apparently Non-anthropized Plot” (ANP). *to be completed, what has been dated?* Dating was performed by AMS by the Radiocarbon Laboratory (A. Mickiewicz University, Poznań, Poland) following their routine protocol.
 
-The surface of each plot was diagnosed by archaeologists. Evidence for pre-Columbian human occupations (such as artifacts, dark soils, earthworks) was searched for in the field, by superficial prospection of the ground surface while walking and carefully examining soils expelled from burrows and mounds resulting from uprooted trees. Exploratory, localized pits were also dug to confirm surface observations and to establish archaeological sequences. This allowed classifying plots as either “Apparently Anthropized Plot” (AAP) or “Apparently Non-anthropized Plot” (ANP).
-
-### Dating
-
-Dating was performed by AMS by the Radiocarbon Laboratory (A. Mickiewicz University, Poznań, Poland) following their routine protocol. Briefly, samples of charcoal dug from pits (after mechanical removal of macroscopic contamination visible under a binocular microscope) were treated with 1M HCl (80°C, 20+ min), 0.025-0.2M NaOH and then 0.25M HCl (80°C, 1 hour). After treatment with each reagent, the samples were rinsed with deionized water (Millipore) until pH = 7. Content of 14C in samples of carbon was measured using the spectrometer "Compact Carbon AMS" (National Electrostatics Corporation, USA) as described by Goslar et al. (2004). The measurement was performed by comparing intensities of ionic beams of 14C, 13C and 12C measured for each sample and for standard samples (modern standard: “Oxalic Acid II” and standard of 14C-free carbon: “background”). In each AMS run, 30-33 samples of unknown age were measured, alternating with measurements of 3-4 samples of modern standard and 1-2 samples of background (coal). Conventional 14C age was calculated using correction for isotopic fractionation according to Stuiver and Polach (1977), based on the ratio of 13C/12C measured in the AMS spectrometer simultaneously with the ratio 14C/12C. Calibration of 14C age was performed using the program OxCal ver. 3.10 (Bronk Ramsey, 2001, 2005). Calibration was performed against the 14C calibration curve IntCal04 (Reimer, 2004).
+// Briefly, samples of charcoal dug from pits (after mechanical removal of macroscopic contamination visible under a binocular microscope) were treated with 1M HCl (80°C, 20+ min), 0.025-0.2M NaOH and then 0.25M HCl (80°C, 1 hour). After treatment with each reagent, the samples were rinsed with deionized water (Millipore) until pH = 7. Content of 14C in samples of carbon was measured using the spectrometer "Compact Carbon AMS" (National Electrostatics Corporation, USA) as described by Goslar et al. (2004). The measurement was performed by comparing intensities of ionic beams of 14C, 13C and 12C measured for each sample and for standard samples (modern standard: “Oxalic Acid II” and standard of 14C-free carbon: “background”). In each AMS run, 30-33 samples of unknown age were measured, alternating with measurements of 3-4 samples of modern standard and 1-2 samples of background (coal). Conventional 14C age was calculated using correction for isotopic fractionation according to Stuiver and Polach (1977), based on the ratio of 13C/12C measured in the AMS spectrometer simultaneously with the ratio 14C/12C. Calibration of 14C age was performed using the program OxCal ver. 3.10 (Bronk Ramsey, 2001, 2005). Calibration was performed against the 14C calibration curve IntCal04 (Reimer, 2004).
 
 Effect of past-anthropization on tree assemblages
 -------------------------------------------------
@@ -211,7 +166,7 @@ data$wd<-getWoodDensity(data$Genre,data$Espece, stand=data$Libelle)$meanWD
 ```
 
     ## The reference dataset contains 16467 wood density values 
-    ## Your taxonomic table contains 979 taxa
+    ## Your taxonomic table contains 952 taxa
 
 ``` r
 data$height<-1/(1/40.53+1/(1.89*data$Circonference/pi))         # Molto Equation
@@ -424,22 +379,6 @@ for (j in levels(data_spat$Libelle))
   sp<-NULL
   print(j)
 }
-```
-
-    ## [1] "Aca"
-    ## [1] "Baf"
-    ## [1] "EpBar"
-    ## [1] "MC87"
-    ## [1] "Mcwila"
-    ## [1] "NouGP"
-    ## [1] "Par18"
-    ## [1] "Par6"
-    ## [1] "Slav"
-    ## [1] "Tib"
-    ## [1] "Tort"
-    ## [1] "Trin"
-
-``` r
 data_spat$type<-"ANP"
 library(ggplot2)
 data_spat[data_spat$Libelle %in% c("Aca", "EpBar", "MC87", "Mcwila"),]$type<-"AAP"
@@ -448,440 +387,52 @@ ggplot(data_spat, aes(richness, Nfood, color = factor(type),
    linetype = factor(Libelle)))+
   geom_point()+
   stat_smooth(method = "loess")
-```
-
-![](CouacAnalyses_files/figure-markdown_github/spatial-1.png)
-
-``` r
 ggplot(data_spat, aes(richness, Nmedicine, color = factor(type), 
    shape = factor(Libelle), 
    linetype = factor(Libelle)))+
   geom_point()+
   stat_smooth(method = "loess")
-```
-
-![](CouacAnalyses_files/figure-markdown_github/spatial-2.png)
-
-``` r
 ggplot(data_spat, aes(richness, Nconstruction, color = factor(type), 
    shape = factor(Libelle), 
    linetype = factor(Libelle)))+
   geom_point()+
   stat_smooth(method = "loess")
-```
-
-![](CouacAnalyses_files/figure-markdown_github/spatial-3.png)
-
-``` r
 ggplot(data_spat, aes(richness, Nfirewood, color = factor(type), 
    shape = factor(Libelle), 
    linetype = factor(Libelle)))+
   geom_point()+
   stat_smooth(method = "loess")
-```
-
-![](CouacAnalyses_files/figure-markdown_github/spatial-4.png)
-
-``` r
 ggplot(data_spat, aes(richness, Ncrafts, color = factor(type), 
    shape = factor(Libelle), 
    linetype = factor(Libelle)))+
   geom_point()+
   stat_smooth(method = "loess")
-```
 
-![](CouacAnalyses_files/figure-markdown_github/spatial-5.png)
-
-``` r
 summary(glm(data_spat$Nmedicine ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle))
-```
-
-    ## 
-    ## Call:
-    ## glm(formula = data_spat$Nmedicine ~ data_spat$Libelle + data_spat$richness:data_spat$type + 
-    ##     data_spat$richness:data_spat$Libelle)
-    ## 
-    ## Deviance Residuals: 
-    ##     Min       1Q   Median       3Q      Max  
-    ## -8.8017  -1.8761  -0.0606   1.8229   9.8007  
-    ## 
-    ## Coefficients: (1 not defined because of singularities)
-    ##                                             Estimate Std. Error t value
-    ## (Intercept)                                 20.61906    1.41791  14.542
-    ## data_spat$LibelleBaf                        -7.50358    1.94608  -3.856
-    ## data_spat$LibelleEpBar                     -15.78147    1.73938  -9.073
-    ## data_spat$LibelleMC87                       -5.46069    1.72388  -3.168
-    ## data_spat$LibelleMcwila                     -4.11348    1.62783  -2.527
-    ## data_spat$LibelleNouGP                     -10.33900    1.77807  -5.815
-    ## data_spat$LibellePar18                     -15.48369    1.74238  -8.887
-    ## data_spat$LibellePar6                      -13.80605    1.55277  -8.891
-    ## data_spat$LibelleSlav                      -10.69848    1.98364  -5.393
-    ## data_spat$LibelleTib                       -11.55208    2.16770  -5.329
-    ## data_spat$LibelleTort                      -12.65327    2.01148  -6.291
-    ## data_spat$LibelleTrin                        5.11035    1.92381   2.656
-    ## data_spat$richness:data_spat$typeAAP        -0.35438    0.06495  -5.457
-    ## data_spat$richness:data_spat$typeANP        -0.59638    0.05665 -10.528
-    ## data_spat$LibelleBaf:data_spat$richness      0.55600    0.08175   6.801
-    ## data_spat$LibelleEpBar:data_spat$richness    0.63219    0.08003   7.900
-    ## data_spat$LibelleMC87:data_spat$richness     0.15578    0.07770   2.005
-    ## data_spat$LibelleMcwila:data_spat$richness   0.16989    0.07648   2.222
-    ## data_spat$LibelleNouGP:data_spat$richness    0.68039    0.07382   9.217
-    ## data_spat$LibellePar18:data_spat$richness    0.90485    0.07536  12.007
-    ## data_spat$LibellePar6:data_spat$richness     0.69540    0.06643  10.469
-    ## data_spat$LibelleSlav:data_spat$richness     0.68527    0.08282   8.275
-    ## data_spat$LibelleTib:data_spat$richness      0.65995    0.08940   7.382
-    ## data_spat$LibelleTort:data_spat$richness     0.69933    0.07925   8.825
-    ## data_spat$LibelleTrin:data_spat$richness          NA         NA      NA
-    ##                                            Pr(>|t|)    
-    ## (Intercept)                                 < 2e-16 ***
-    ## data_spat$LibelleBaf                       0.000117 ***
-    ## data_spat$LibelleEpBar                      < 2e-16 ***
-    ## data_spat$LibelleMC87                      0.001544 ** 
-    ## data_spat$LibelleMcwila                    0.011530 *  
-    ## data_spat$LibelleNouGP                     6.38e-09 ***
-    ## data_spat$LibellePar18                      < 2e-16 ***
-    ## data_spat$LibellePar6                       < 2e-16 ***
-    ## data_spat$LibelleSlav                      7.18e-08 ***
-    ## data_spat$LibelleTib                       1.02e-07 ***
-    ## data_spat$LibelleTort                      3.39e-10 ***
-    ## data_spat$LibelleTrin                      0.007919 ** 
-    ## data_spat$richness:data_spat$typeAAP       5.05e-08 ***
-    ## data_spat$richness:data_spat$typeANP        < 2e-16 ***
-    ## data_spat$LibelleBaf:data_spat$richness    1.14e-11 ***
-    ## data_spat$LibelleEpBar:data_spat$richness  3.30e-15 ***
-    ## data_spat$LibelleMC87:data_spat$richness   0.045030 *  
-    ## data_spat$LibelleMcwila:data_spat$richness 0.026354 *  
-    ## data_spat$LibelleNouGP:data_spat$richness   < 2e-16 ***
-    ## data_spat$LibellePar18:data_spat$richness   < 2e-16 ***
-    ## data_spat$LibellePar6:data_spat$richness    < 2e-16 ***
-    ## data_spat$LibelleSlav:data_spat$richness    < 2e-16 ***
-    ## data_spat$LibelleTib:data_spat$richness    1.77e-13 ***
-    ## data_spat$LibelleTort:data_spat$richness    < 2e-16 ***
-    ## data_spat$LibelleTrin:data_spat$richness         NA    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## (Dispersion parameter for gaussian family taken to be 7.556957)
-    ## 
-    ##     Null deviance: 58493  on 6073  degrees of freedom
-    ## Residual deviance: 45720  on 6050  degrees of freedom
-    ## AIC: 29548
-    ## 
-    ## Number of Fisher Scoring iterations: 2
-
-``` r
 summary(glm(data_spat$Ncrafts ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle-1))
-```
-
-    ## 
-    ## Call:
-    ## glm(formula = data_spat$Ncrafts ~ data_spat$Libelle + data_spat$richness:data_spat$type + 
-    ##     data_spat$richness:data_spat$Libelle - 1)
-    ## 
-    ## Deviance Residuals: 
-    ##      Min        1Q    Median        3Q       Max  
-    ## -12.7018   -1.7398    0.0643    1.7809    9.5318  
-    ## 
-    ## Coefficients: (1 not defined because of singularities)
-    ##                                            Estimate Std. Error t value
-    ## data_spat$LibelleAca                       24.95800    1.42228  17.548
-    ## data_spat$LibelleBaf                       19.05332    1.33706  14.250
-    ## data_spat$LibelleEpBar                      9.88522    1.01056   9.782
-    ## data_spat$LibelleMC87                      11.85758    0.98348  12.057
-    ## data_spat$LibelleMcwila                    23.35458    0.80208  29.118
-    ## data_spat$LibelleNouGP                     18.14694    1.07620  16.862
-    ## data_spat$LibellePar18                     14.89179    1.01576  14.661
-    ## data_spat$LibellePar6                      15.83190    0.63490  24.936
-    ## data_spat$LibelleSlav                      25.50622    1.39149  18.330
-    ## data_spat$LibelleTib                       17.07821    1.64471  10.384
-    ## data_spat$LibelleTort                      21.53017    1.43114  15.044
-    ## data_spat$LibelleTrin                      24.17948    1.30424  18.539
-    ## data_spat$richness:data_spat$typeAAP       -0.11858    0.06515  -1.820
-    ## data_spat$richness:data_spat$typeANP       -0.22388    0.05682  -3.940
-    ## data_spat$LibelleBaf:data_spat$richness     0.29468    0.08200   3.594
-    ## data_spat$LibelleEpBar:data_spat$richness   0.41352    0.08027   5.151
-    ## data_spat$LibelleMC87:data_spat$richness    0.40534    0.07794   5.200
-    ## data_spat$LibelleMcwila:data_spat$richness  0.11224    0.07671   1.463
-    ## data_spat$LibelleNouGP:data_spat$richness   0.20654    0.07405   2.789
-    ## data_spat$LibellePar18:data_spat$richness   0.41733    0.07559   5.521
-    ## data_spat$LibellePar6:data_spat$richness    0.34076    0.06663   5.114
-    ## data_spat$LibelleSlav:data_spat$richness   -0.03978    0.08307  -0.479
-    ## data_spat$LibelleTib:data_spat$richness     0.23996    0.08968   2.676
-    ## data_spat$LibelleTort:data_spat$richness    0.13500    0.07949   1.698
-    ## data_spat$LibelleTrin:data_spat$richness         NA         NA      NA
-    ##                                            Pr(>|t|)    
-    ## data_spat$LibelleAca                        < 2e-16 ***
-    ## data_spat$LibelleBaf                        < 2e-16 ***
-    ## data_spat$LibelleEpBar                      < 2e-16 ***
-    ## data_spat$LibelleMC87                       < 2e-16 ***
-    ## data_spat$LibelleMcwila                     < 2e-16 ***
-    ## data_spat$LibelleNouGP                      < 2e-16 ***
-    ## data_spat$LibellePar18                      < 2e-16 ***
-    ## data_spat$LibellePar6                       < 2e-16 ***
-    ## data_spat$LibelleSlav                       < 2e-16 ***
-    ## data_spat$LibelleTib                        < 2e-16 ***
-    ## data_spat$LibelleTort                       < 2e-16 ***
-    ## data_spat$LibelleTrin                       < 2e-16 ***
-    ## data_spat$richness:data_spat$typeAAP       0.068772 .  
-    ## data_spat$richness:data_spat$typeANP       8.23e-05 ***
-    ## data_spat$LibelleBaf:data_spat$richness    0.000329 ***
-    ## data_spat$LibelleEpBar:data_spat$richness  2.67e-07 ***
-    ## data_spat$LibelleMC87:data_spat$richness   2.05e-07 ***
-    ## data_spat$LibelleMcwila:data_spat$richness 0.143500    
-    ## data_spat$LibelleNouGP:data_spat$richness  0.005297 ** 
-    ## data_spat$LibellePar18:data_spat$richness  3.51e-08 ***
-    ## data_spat$LibellePar6:data_spat$richness   3.25e-07 ***
-    ## data_spat$LibelleSlav:data_spat$richness   0.632048    
-    ## data_spat$LibelleTib:data_spat$richness    0.007475 ** 
-    ## data_spat$LibelleTort:data_spat$richness   0.089501 .  
-    ## data_spat$LibelleTrin:data_spat$richness         NA    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## (Dispersion parameter for gaussian family taken to be 7.603628)
-    ## 
-    ##     Null deviance: 2326215  on 6074  degrees of freedom
-    ## Residual deviance:   46002  on 6050  degrees of freedom
-    ## AIC: 29585
-    ## 
-    ## Number of Fisher Scoring iterations: 2
-
-``` r
 summary(glm(data_spat$Nconstruction ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle))
-```
-
-    ## 
-    ## Call:
-    ## glm(formula = data_spat$Nconstruction ~ data_spat$Libelle + data_spat$richness:data_spat$type + 
-    ##     data_spat$richness:data_spat$Libelle)
-    ## 
-    ## Deviance Residuals: 
-    ##     Min       1Q   Median       3Q      Max  
-    ## -10.750   -2.231   -0.024    2.208   11.010  
-    ## 
-    ## Coefficients: (1 not defined because of singularities)
-    ##                                            Estimate Std. Error t value
-    ## (Intercept)                                 3.58913    1.62169   2.213
-    ## data_spat$LibelleBaf                        4.36058    2.22578   1.959
-    ## data_spat$LibelleEpBar                     11.84220    1.98936   5.953
-    ## data_spat$LibelleMC87                       8.05577    1.97164   4.086
-    ## data_spat$LibelleMcwila                     8.29470    1.86179   4.455
-    ## data_spat$LibelleNouGP                     20.22801    2.03362   9.947
-    ## data_spat$LibellePar18                      5.74954    1.99280   2.885
-    ## data_spat$LibellePar6                      17.68356    1.77594   9.957
-    ## data_spat$LibelleSlav                      17.16458    2.26873   7.566
-    ## data_spat$LibelleTib                       31.79051    2.47925  12.823
-    ## data_spat$LibelleTort                       9.47399    2.30057   4.118
-    ## data_spat$LibelleTrin                      19.71778    2.20031   8.961
-    ## data_spat$richness:data_spat$typeAAP        0.33238    0.07428   4.475
-    ## data_spat$richness:data_spat$typeANP       -0.35708    0.06479  -5.512
-    ## data_spat$LibelleBaf:data_spat$richness     0.52014    0.09350   5.563
-    ## data_spat$LibelleEpBar:data_spat$richness  -0.49793    0.09153  -5.440
-    ## data_spat$LibelleMC87:data_spat$richness   -0.23042    0.08887  -2.593
-    ## data_spat$LibelleMcwila:data_spat$richness -0.35667    0.08747  -4.078
-    ## data_spat$LibelleNouGP:data_spat$richness  -0.03681    0.08443  -0.436
-    ## data_spat$LibellePar18:data_spat$richness   0.51064    0.08619   5.925
-    ## data_spat$LibellePar6:data_spat$richness    0.07287    0.07597   0.959
-    ## data_spat$LibelleSlav:data_spat$richness    0.01975    0.09472   0.209
-    ## data_spat$LibelleTib:data_spat$richness    -0.43482    0.10225  -4.252
-    ## data_spat$LibelleTort:data_spat$richness    0.33442    0.09063   3.690
-    ## data_spat$LibelleTrin:data_spat$richness         NA         NA      NA
-    ##                                            Pr(>|t|)    
-    ## (Intercept)                                0.026921 *  
-    ## data_spat$LibelleBaf                       0.050144 .  
-    ## data_spat$LibelleEpBar                     2.78e-09 ***
-    ## data_spat$LibelleMC87                      4.45e-05 ***
-    ## data_spat$LibelleMcwila                    8.53e-06 ***
-    ## data_spat$LibelleNouGP                      < 2e-16 ***
-    ## data_spat$LibellePar18                     0.003926 ** 
-    ## data_spat$LibellePar6                       < 2e-16 ***
-    ## data_spat$LibelleSlav                      4.43e-14 ***
-    ## data_spat$LibelleTib                        < 2e-16 ***
-    ## data_spat$LibelleTort                      3.87e-05 ***
-    ## data_spat$LibelleTrin                       < 2e-16 ***
-    ## data_spat$richness:data_spat$typeAAP       7.79e-06 ***
-    ## data_spat$richness:data_spat$typeANP       3.70e-08 ***
-    ## data_spat$LibelleBaf:data_spat$richness    2.76e-08 ***
-    ## data_spat$LibelleEpBar:data_spat$richness  5.53e-08 ***
-    ## data_spat$LibelleMC87:data_spat$richness   0.009545 ** 
-    ## data_spat$LibelleMcwila:data_spat$richness 4.61e-05 ***
-    ## data_spat$LibelleNouGP:data_spat$richness  0.662854    
-    ## data_spat$LibellePar18:data_spat$richness  3.30e-09 ***
-    ## data_spat$LibellePar6:data_spat$richness   0.337521    
-    ## data_spat$LibelleSlav:data_spat$richness   0.834820    
-    ## data_spat$LibelleTib:data_spat$richness    2.15e-05 ***
-    ## data_spat$LibelleTort:data_spat$richness   0.000226 ***
-    ## data_spat$LibelleTrin:data_spat$richness         NA    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## (Dispersion parameter for gaussian family taken to be 9.88528)
-    ## 
-    ##     Null deviance: 84420  on 6073  degrees of freedom
-    ## Residual deviance: 59806  on 6050  degrees of freedom
-    ## AIC: 31179
-    ## 
-    ## Number of Fisher Scoring iterations: 2
-
-``` r
 summary(glm(data_spat$Nfirewood ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle))
-```
-
-    ## 
-    ## Call:
-    ## glm(formula = data_spat$Nfirewood ~ data_spat$Libelle + data_spat$richness:data_spat$type + 
-    ##     data_spat$richness:data_spat$Libelle)
-    ## 
-    ## Deviance Residuals: 
-    ##     Min       1Q   Median       3Q      Max  
-    ## -9.5810  -1.7271  -0.0802   1.6665   9.4941  
-    ## 
-    ## Coefficients: (1 not defined because of singularities)
-    ##                                             Estimate Std. Error t value
-    ## (Intercept)                                 16.56096    1.30140  12.726
-    ## data_spat$LibelleBaf                       -15.74859    1.78617  -8.817
-    ## data_spat$LibelleEpBar                      -9.85805    1.59645  -6.175
-    ## data_spat$LibelleMC87                      -14.81355    1.58223  -9.362
-    ## data_spat$LibelleMcwila                     -4.13810    1.49407  -2.770
-    ## data_spat$LibelleNouGP                     -20.62079    1.63197 -12.636
-    ## data_spat$LibellePar18                     -10.16455    1.59921  -6.356
-    ## data_spat$LibellePar6                      -12.20087    1.42518  -8.561
-    ## data_spat$LibelleSlav                      -18.97152    1.82064 -10.420
-    ## data_spat$LibelleTib                         4.93008    1.98958   2.478
-    ## data_spat$LibelleTort                       -6.82837    1.84620  -3.699
-    ## data_spat$LibelleTrin                       -2.89938    1.76573  -1.642
-    ## data_spat$richness:data_spat$typeAAP        -0.21342    0.05961  -3.580
-    ## data_spat$richness:data_spat$typeANP        -0.27139    0.05199  -5.220
-    ## data_spat$LibelleBaf:data_spat$richness      0.61384    0.07503   8.181
-    ## data_spat$LibelleEpBar:data_spat$richness    0.42960    0.07345   5.849
-    ## data_spat$LibelleMC87:data_spat$richness     0.49072    0.07132   6.881
-    ## data_spat$LibelleMcwila:data_spat$richness   0.16390    0.07019   2.335
-    ## data_spat$LibelleNouGP:data_spat$richness    0.74612    0.06775  11.012
-    ## data_spat$LibellePar18:data_spat$richness    0.45289    0.06917   6.548
-    ## data_spat$LibellePar6:data_spat$richness     0.40454    0.06097   6.635
-    ## data_spat$LibelleSlav:data_spat$richness     0.66367    0.07601   8.731
-    ## data_spat$LibelleTib:data_spat$richness     -0.09023    0.08206  -1.100
-    ## data_spat$LibelleTort:data_spat$richness     0.32322    0.07273   4.444
-    ## data_spat$LibelleTrin:data_spat$richness          NA         NA      NA
-    ##                                            Pr(>|t|)    
-    ## (Intercept)                                 < 2e-16 ***
-    ## data_spat$LibelleBaf                        < 2e-16 ***
-    ## data_spat$LibelleEpBar                     7.05e-10 ***
-    ## data_spat$LibelleMC87                       < 2e-16 ***
-    ## data_spat$LibelleMcwila                    0.005628 ** 
-    ## data_spat$LibelleNouGP                      < 2e-16 ***
-    ## data_spat$LibellePar18                     2.22e-10 ***
-    ## data_spat$LibellePar6                       < 2e-16 ***
-    ## data_spat$LibelleSlav                       < 2e-16 ***
-    ## data_spat$LibelleTib                       0.013241 *  
-    ## data_spat$LibelleTort                      0.000219 ***
-    ## data_spat$LibelleTrin                      0.100637    
-    ## data_spat$richness:data_spat$typeAAP       0.000346 ***
-    ## data_spat$richness:data_spat$typeANP       1.85e-07 ***
-    ## data_spat$LibelleBaf:data_spat$richness    3.40e-16 ***
-    ## data_spat$LibelleEpBar:data_spat$richness  5.21e-09 ***
-    ## data_spat$LibelleMC87:data_spat$richness   6.56e-12 ***
-    ## data_spat$LibelleMcwila:data_spat$richness 0.019577 *  
-    ## data_spat$LibelleNouGP:data_spat$richness   < 2e-16 ***
-    ## data_spat$LibellePar18:data_spat$richness  6.32e-11 ***
-    ## data_spat$LibellePar6:data_spat$richness   3.52e-11 ***
-    ## data_spat$LibelleSlav:data_spat$richness    < 2e-16 ***
-    ## data_spat$LibelleTib:data_spat$richness    0.271518    
-    ## data_spat$LibelleTort:data_spat$richness   8.99e-06 ***
-    ## data_spat$LibelleTrin:data_spat$richness         NA    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## (Dispersion parameter for gaussian family taken to be 6.366086)
-    ## 
-    ##     Null deviance: 68954  on 6073  degrees of freedom
-    ## Residual deviance: 38515  on 6050  degrees of freedom
-    ## AIC: 28506
-    ## 
-    ## Number of Fisher Scoring iterations: 2
-
-``` r
 summary(glm(data_spat$Nfood ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle))
 ```
-
-    ## 
-    ## Call:
-    ## glm(formula = data_spat$Nfood ~ data_spat$Libelle + data_spat$richness:data_spat$type + 
-    ##     data_spat$richness:data_spat$Libelle)
-    ## 
-    ## Deviance Residuals: 
-    ##     Min       1Q   Median       3Q      Max  
-    ## -9.8514  -1.8162  -0.0486   1.6614   9.3536  
-    ## 
-    ## Coefficients: (1 not defined because of singularities)
-    ##                                             Estimate Std. Error t value
-    ## (Intercept)                                 13.17635    1.32336   9.957
-    ## data_spat$LibelleBaf                        -7.29892    1.81631  -4.019
-    ## data_spat$LibelleEpBar                      -1.40151    1.62339  -0.863
-    ## data_spat$LibelleMC87                       -0.65316    1.60893  -0.406
-    ## data_spat$LibelleMcwila                     -1.29451    1.51929  -0.852
-    ## data_spat$LibelleNouGP                     -15.97589    1.65951  -9.627
-    ## data_spat$LibellePar18                     -12.64062    1.62620  -7.773
-    ## data_spat$LibellePar6                       -9.53093    1.44923  -6.577
-    ## data_spat$LibelleSlav                       -8.09467    1.85137  -4.372
-    ## data_spat$LibelleTib                       -11.37240    2.02316  -5.621
-    ## data_spat$LibelleTort                        2.67835    1.87735   1.427
-    ## data_spat$LibelleTrin                       -2.71401    1.79553  -1.512
-    ## data_spat$richness:data_spat$typeAAP        -0.21702    0.06062  -3.580
-    ## data_spat$richness:data_spat$typeANP        -0.11466    0.05287  -2.169
-    ## data_spat$LibelleBaf:data_spat$richness      0.18529    0.07630   2.428
-    ## data_spat$LibelleEpBar:data_spat$richness    0.17638    0.07469   2.361
-    ## data_spat$LibelleMC87:data_spat$richness     0.18649    0.07252   2.571
-    ## data_spat$LibelleMcwila:data_spat$richness   0.25950    0.07138   3.636
-    ## data_spat$LibelleNouGP:data_spat$richness    0.62094    0.06890   9.013
-    ## data_spat$LibellePar18:data_spat$richness    0.58040    0.07033   8.252
-    ## data_spat$LibellePar6:data_spat$richness     0.18470    0.06200   2.979
-    ## data_spat$LibelleSlav:data_spat$richness     0.25934    0.07729   3.355
-    ## data_spat$LibelleTib:data_spat$richness      0.40920    0.08344   4.904
-    ## data_spat$LibelleTort:data_spat$richness    -0.04875    0.07396  -0.659
-    ## data_spat$LibelleTrin:data_spat$richness          NA         NA      NA
-    ##                                            Pr(>|t|)    
-    ## (Intercept)                                 < 2e-16 ***
-    ## data_spat$LibelleBaf                       5.93e-05 ***
-    ## data_spat$LibelleEpBar                     0.387994    
-    ## data_spat$LibelleMC87                      0.684785    
-    ## data_spat$LibelleMcwila                    0.394221    
-    ## data_spat$LibelleNouGP                      < 2e-16 ***
-    ## data_spat$LibellePar18                     8.94e-15 ***
-    ## data_spat$LibellePar6                      5.22e-11 ***
-    ## data_spat$LibelleSlav                      1.25e-05 ***
-    ## data_spat$LibelleTib                       1.98e-08 ***
-    ## data_spat$LibelleTort                      0.153729    
-    ## data_spat$LibelleTrin                      0.130704    
-    ## data_spat$richness:data_spat$typeAAP       0.000346 ***
-    ## data_spat$richness:data_spat$typeANP       0.030134 *  
-    ## data_spat$LibelleBaf:data_spat$richness    0.015191 *  
-    ## data_spat$LibelleEpBar:data_spat$richness  0.018235 *  
-    ## data_spat$LibelleMC87:data_spat$richness   0.010151 *  
-    ## data_spat$LibelleMcwila:data_spat$richness 0.000280 ***
-    ## data_spat$LibelleNouGP:data_spat$richness   < 2e-16 ***
-    ## data_spat$LibellePar18:data_spat$richness   < 2e-16 ***
-    ## data_spat$LibellePar6:data_spat$richness   0.002903 ** 
-    ## data_spat$LibelleSlav:data_spat$richness   0.000798 ***
-    ## data_spat$LibelleTib:data_spat$richness    9.63e-07 ***
-    ## data_spat$LibelleTort:data_spat$richness   0.509825    
-    ## data_spat$LibelleTrin:data_spat$richness         NA    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## (Dispersion parameter for gaussian family taken to be 6.58276)
-    ## 
-    ##     Null deviance: 75561  on 6073  degrees of freedom
-    ## Residual deviance: 39826  on 6050  degrees of freedom
-    ## AIC: 28709
-    ## 
-    ## Number of Fisher Scoring iterations: 2
 
 Supplementary materials
 =======================
 
-Effects on anthropization on Botanical Families
------------------------------------------------
+Archeological Description of the sampled sites
+----------------------------------------------
+
+### Aca : The Acarouany site
+
+### EpBar: The Eperon Barré site
+
+### FC: The Fortunat Capiri site
+
+### MC87: The Montagne Couronnée 87 site
+
+### Mcwila: The XXXXXXX site
+
+Effects on anthropization on abundance of Botanical Families
+------------------------------------------------------------
 
 The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Only three families had clear patterns of segregation (*P* &lt; 0.05). These are Arecaceae, Burseraceae and Lauraceae that are significantly more frequent in AAPs. On the other hand, Apocynaceae and Lecythidaceae are marginally (*P*&lt;0.1) less frequent in AAPs.
 
@@ -910,7 +461,7 @@ p + facet_wrap( ~ Var2, scales="free")
 
 *Relative frequencies of the 20 most abundant families in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP). Wilcoxon Rank test of significance.*
 
-Indicator Species in anthropized AAP plots
+Indicator Species of anthropized AAP plots
 ------------------------------------------
 
 The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. *Pourouma minor*, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
@@ -937,35 +488,15 @@ rownames(indic)<-NULL
 kable(indic)
 ```
 
-| Family          | Species                 | Indicator |  Strength|  Pvalue|
-|:----------------|:------------------------|:----------|---------:|-------:|
-| Euphorbiaceae   | Aparisthmium cordatum   | AAP       |     0.775|   0.040|
-| Arecaceae       | Astrocaryum sciophilum  | AAP       |     0.911|   0.020|
-| Fabaceae        | Batesia floribunda      | AAP       |     0.775|   0.040|
-| Euphorbiaceae   | Conceveiba guianensis   | AAP       |     0.870|   0.020|
-| Meliaceae       | Guarea gomma            | AAP       |     0.775|   0.040|
-| Fabaceae        | Inga alba               | AAP       |     0.857|   0.020|
-| Lauraceae       | Licaria martiniana      | AAP       |     0.861|   0.040|
-| Arecaceae       | Oenocarpus bacaba       | AAP       |     0.873|   0.015|
-| Urticaceae      | Pourouma minor          | AAP       |     0.770|   0.015|
-| Burseraceae     | Protium apiculatum      | AAP       |     0.838|   0.030|
-| Burseraceae     | Protium decandrum       | AAP       |     0.826|   0.045|
-| Burseraceae     | Protium trifoliolatum   | AAP       |     0.963|   0.010|
-| Humiriaceae     | Sacoglottis cydonioides | AAP       |     0.843|   0.020|
-| Anacardiaceae   | Thyrsodium spruceanum   | AAP       |     0.737|   0.045|
-| Apocynaceae     | Aspidosperma album      | ANP       |     1.000|   0.030|
-| Rubiaceae       | Chimarrhis turbinata    | ANP       |     0.847|   0.045|
-| Lecythidaceae   | Couratari multiflora    | ANP       |     1.000|   0.015|
-| Lecythidaceae   | Gustavia hexapetala     | ANP       |     0.740|   0.020|
-| Lecythidaceae   | Lecythis persistens     | ANP       |     0.729|   0.005|
-| Melastomataceae | Mouriri crassifolia     | ANP       |     1.000|   0.020|
-| Simaroubaceae   | Simaba cedron           | ANP       |     1.000|   0.020|
-| Fabaceae        | Swartzia polyphylla     | ANP       |     0.861|   0.045|
+| Family        | Species               | Indicator |  Strength|  Pvalue|
+|:--------------|:----------------------|:----------|---------:|-------:|
+| Euphorbiaceae | Conceveiba guianensis | AAP       |      0.87|   0.020|
+| Lecythidaceae | Couratari multiflora  | ANP       |      1.00|   0.015|
 
 *Indicator species in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP), Families, Botanical names, Strength of the Association and P values.*
 
-Effects on anthropization on Forest diversity
----------------------------------------------
+Effects on anthropization on community diversity profiles
+---------------------------------------------------------
 
 ``` r
 library(entropart)
