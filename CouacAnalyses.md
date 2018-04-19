@@ -24,7 +24,7 @@ Hérault, Odonne & co
     -   [Ethnobotanical Analysis](#ethnobotanical-analysis-1)
         -   [Traditional uses](#traditional-uses-1)
         -   [Plant parts](#plant-parts-1)
-        -   [Use values and spatial diversity](#use-values-and-spatial-diversity)
+-   [Discussion](#discussion)
 -   [Supplementary materials](#supplementary-materials)
     -   [Archeological Description of the sampled sites](#archeological-description-of-the-sampled-sites)
         -   [Aca : The Acarouany site](#aca-the-acarouany-site)
@@ -35,10 +35,6 @@ Hérault, Odonne & co
     -   [Effects on anthropization on abundance of Botanical Families](#effects-on-anthropization-on-abundance-of-botanical-families)
     -   [Indicator Species of anthropized AAP plots](#indicator-species-of-anthropized-aap-plots)
     -   [Effects on anthropization on community diversity profiles](#effects-on-anthropization-on-community-diversity-profiles)
-
-``` r
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 Introduction
 ============
@@ -154,42 +150,8 @@ Effects of past-anthropization on tree assemblages
 
 ### Forest Structure
 
-``` r
-library(BIOMASS)
-library(ggplot2)
-dataTaxo<-unique(data.frame(genus=data$Genre,species=data$Espece))
-#dataTaxoC<-correctTaxo(dataTaxo$genus,dataTaxo$species)
-#save(dataTaxoC,file="taxo.RData")
-#table(dataTaxoC$nameModified)
-load(file="taxo.RData")
-data$wd<-getWoodDensity(data$Genre,data$Espece, stand=data$Libelle)$meanWD
-```
-
     ## The reference dataset contains 16467 wood density values 
     ## Your taxonomic table contains 952 taxa
-
-``` r
-data$height<-1/(1/40.53+1/(1.89*data$Circonference/pi))         # Molto Equation
-data$agb<-computeAGB(D=data$Circonference/pi,WD=data$wd, H=data$height)
-tab$Plot_Area<-as.numeric(as.character(tab$Plot_Area))
-tab$agb<-as.numeric(tapply(data$agb,data$Libelle,sum))/tab$Plot_Area
-tab$N<-tab$N_trees/tab$Plot_Area
-tab$Dg<-as.numeric(tapply(data$Circonference/pi,data$Libelle,function(x) {sqrt(mean(x^2))}))
-tab$ba<-as.numeric(tapply(data$Circonference/pi/2,data$Libelle,function(x) {sum(pi*(x/100)^2)}))/tab$Plot_Area
-data_str<-data.frame(var=c(rep("AGB",13),rep("N trees",13),rep("Quad Diam",13), rep("Basal area",13)),value=c(tab$agb,tab$N,tab$Dg,tab$ba),type=rep(tab$Type,4))
-data_str<-na.omit(data_str)
-var<-levels(data_str$var)
-data_str$var<-as.character(data_str$var)
-for (i in var){
-test<-round(wilcox.test(data_str[data_str$var==i & data_str$type=="AAP",]$value,
-            data_str[data_str$var==i & data_str$type=="ANP",]$value)$p.value,3)
-data_str[data_str$var== i,]$var<-paste(i," (P=", test, ")", sep="")}
-p <- ggplot(data = data_str, aes(x=var, y=value)) + 
-  geom_boxplot(aes(fill=type)) +
-  theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
-  coord_flip()
-p + facet_wrap( ~ var, scales="free")
-```
 
 ![](CouacAnalyses_files/figure-markdown_github/struct-1.png)
 
@@ -199,51 +161,11 @@ p + facet_wrap( ~ var, scales="free")
 
 AAPs and ANPs plots are well separated along the 1st axis of the DCA (figure 2). AAP sites were grouped towards the right side of the axis 1 that represents 35% of the observed variation in species composition. Past human occupation is thus the main source of differences in species composition among our sampled plots.
 
-``` r
-library(vegan)
-data<-data[!data$Espece=="Indet.",]
-data<-data[!is.na(data$Genre),]
-data$species<-paste(data$Genre,data$Espece, sep=" ")
-data_dca<-t(table(data$species,data$Libelle))
-dca<-decorana(data_dca)
-plot(dca$cproj[,1:2], cex=0.1, xlab="Axis 1 (35.0%)", ylab="Axis 2 (23.8%)")
-points(dca$rproj[,1:2], col=tab$Type, pch=15, cex=1)
-x<-round(as.numeric(dca$rproj[,1]),2)
-y<-round(as.numeric(dca$rproj[,2]),2)
-y[9]<-y[9]+0.2
-y[8]<-y[8]+0.2
-y[3]<-y[3]-0.2
-y[5]<-y[5]+0.2
-text(x, y, tab$Plot_Name, pos=4)
-```
-
 ![](CouacAnalyses_files/figure-markdown_github/dca-1.png)
 
 *Detrended Correspondance Analysis performed on the tree composition dataset. Small dots are species. Large dots are sampled sites, either AAPs (black) or ANPs (red).*
 
 #### Functional composition
-
-``` r
-library(ggplot2)
-traits<-read.csv2("TraitsAll.csv")
-data_traits<-merge(data,traits, by.x="species", by.y="Taxon", all.x=F, all.y=F)
-tab$WD<-as.numeric(tapply(data_traits$wd,data_traits$Libelle,mean))
-tab$SLA<-as.numeric(tapply(data_traits$SLA,data_traits$Libelle,mean, na.rm=T))
-tab$Seed<-as.numeric(tapply(data_traits$Seed,data_traits$Libelle,mean, na.rm=T))
-tab$Height<-as.numeric(tapply(data_traits$Height,data_traits$Libelle,mean, na.rm=T))
-data_trait<-data.frame(var=c(rep("Wood Density",13),rep("Specific Leaf Area",13),rep("Seed Mass",13), rep("Height",13)),Trait_Value=c(tab$WD,tab$SLA,tab$Seed,tab$Height),type=rep(tab$Type,4))
-var<-levels(as.factor(data_trait$var))
-data_trait$var<-as.character(data_trait$var)
-for (i in var){
-test<-round(wilcox.test(data_trait[data_trait$var==i & data_trait$type=="AAP",]$Trait_Value,
-             data_trait[data_trait$var==i & data_trait$type=="ANP",]$Trait_Value)$p.value,3)
- data_trait[data_trait$var== i,]$var<-paste(i," (P=", test, ")", sep="")}
-p <- ggplot(data = data_trait, aes(x=var, y=Trait_Value)) + 
-   geom_boxplot(aes(fill=type)) +
-   theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
-   coord_flip()
- p + facet_wrap( ~ var, scales="free")
-```
 
 ![](CouacAnalyses_files/figure-markdown_github/traits-1.png)
 
@@ -262,158 +184,18 @@ Ethnobotanical Analysis
 
 Use categories of the trees in each plot were submitted to an ANOVA (one factor, lm function in R) in order to detect relationships between uses and species composition of plot. The different trends are shown in figure 6. Plants used as human food were significantly more often present (p &lt; 0.02) in AAPs than in ANPs. This trend was also observed for species used as firewood, although it was less evident (p &lt; 0.09). No conclusion can be drawn for species in the “medicine and magic” and “arts and crafts” categories owing to their high p values. Lastly, species used in construction tended to be more often present (p &lt; 0.09) in non-anthropogenic plots (ANPs) than in AAPs. These trends are important result of our study, corroborating the results of section 3.2 (figure 2). Presence of human occupation seems to be detectable up to 600 or even 1000 years after the presumed occupation, and biocultural interactions are probably important factors explaining present-day forest composition.
 
-``` r
-library(ggplot2)
-uses<-read.csv2("uses.csv")
-uses_t<-data.frame(species=uses$X...genre_espece, Crafts=uses$Artisanat, Construction=uses$Construction, Firewood=uses$Feu, Food=uses$Alimentation, Medicine=uses$M..d.Mag)
-data_uses<-merge(data,uses_t, by.x="species", by.y="species", all.x=F, all.y=F)
-data_uses[data_uses$Crafts>0,]$Crafts<-1
-data_uses[data_uses$Construction>0,]$Construction<-1
-data_uses[data_uses$Firewood>0,]$Firewood<-1
-data_uses[data_uses$Food>0,]$Food<-1
-data_uses[data_uses$Medicine>0,]$Medicine<-1
-tab$Crafts<-as.numeric(tapply(data_uses$Crafts,data_uses$Libelle,sum))/
-  as.numeric(tapply(data_uses$Crafts,data_uses$Libelle,length))
-tab$Construction<-as.numeric(tapply(data_uses$Construction,data_uses$Libelle,sum))/
-  as.numeric(tapply(data_uses$Construction,data_uses$Libelle,length))
-tab$Firewood<-as.numeric(tapply(data_uses$Firewood,data_uses$Libelle,sum))/
-  as.numeric(tapply(data_uses$Firewood,data_uses$Libelle,length))
-tab$Food<-as.numeric(tapply(data_uses$Food,data_uses$Libelle,sum))/
-  as.numeric(tapply(data_uses$Food,data_uses$Libelle,length))
-tab$Medicine<-as.numeric(tapply(data_uses$Medicine,data_uses$Libelle,sum))/
-  as.numeric(tapply(data_uses$Medicine,data_uses$Libelle,length))
-data_use<-data.frame(var=c(rep("Crafts",13),rep("Construction",13),rep("Firewood",13), rep("Food",13), rep("Medicine",13)),Use_Value=c(tab$Crafts,tab$Construction,tab$Firewood,tab$Food, tab$Medicine),type=rep(tab$Type,5))
-var<-levels(data_use$var)
-data_use$var<-as.character(data_use$var)
-for (i in var){
-test<-round(wilcox.test(data_use[data_use$var==i & data_use$type=="AAP",]$Use_Value,
-             data_use[data_use$var==i & data_use$type=="ANP",]$Use_Value)$p.value,3)
- data_use[data_use$var== i,]$var<-paste(i," (P=", test, ")", sep="")}
-p <- ggplot(data = data_use, aes(x=var, y=Use_Value)) + 
-   geom_boxplot(aes(fill=type)) +
-   theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
-   coord_flip()
- p + facet_wrap( ~ var, scales="free")
-```
-
 ![](CouacAnalyses_files/figure-markdown_github/uses-1.png)
 
 ### Plant parts
 
 As for section 3.3.2, an ANOVA was performed in order to detect relationships between the parts potentially used for each plant and species composition of plots. The trends observed are shown in figure 7. Plants with useful seeds and fruits (p &lt; 0.02), leaves and flowers (p &lt; 0.03), underground organs (p &lt; 0.12) and exudates (p &lt; 0.17) were, at diverse scales, more often present on AAPs than on ANPs. The most striking difference concerned species with useful seeds and fruits. Conversely, an increase in the abundance of plants used for their bark (p &lt; 0.06) and to a lesser extent of those used for their wood and stems (p &lt; 0.29) was observed for the ANPs. The different patterns observed appear to support the hypothesis that pre-Columbian humans had a long-term influence on present day patterns of biodiversity.
 
-``` r
-library(ggplot2)
-parts_t<-data.frame(species=uses$X...genre_espece, Bark=uses$Ecorces, Exsudates= uses$Exsudats, Fruits=uses$Graines_Fruits, Leaves=uses$Feuilles_Fleurs, Underground=uses$Org.St, Wood=uses$Bois_Tiges)
-data_parts<-merge(data,parts_t, by.x="species", by.y="species", all.x=F, all.y=F)
-data_parts[data_parts$Bark>0,]$Bark<-1
-data_parts[data_parts$Exsudates>0,]$Exsudates<-1
-data_parts[data_parts$Fruits>0,]$Fruits<-1
-data_parts[data_parts$Leaves>0,]$Leaves<-1
-data_parts[data_parts$Underground>0,]$Underground<-1
-data_parts[data_parts$Wood>0,]$Wood<-1
-tab$Bark<-as.numeric(tapply(data_parts$Bark,data_parts$Libelle,sum))/
-  as.numeric(tapply(data_parts$Bark,data_parts$Libelle,length))
-tab$Exsudates<-as.numeric(tapply(data_parts$Exsudates,data_parts$Libelle,sum))/
-  as.numeric(tapply(data_parts$Exsudates,data_parts$Libelle,length))
-tab$Fruits<-as.numeric(tapply(data_parts$Fruits,data_parts$Libelle,sum))/
-  as.numeric(tapply(data_parts$Fruits,data_parts$Libelle,length))
-tab$Leaves<-as.numeric(tapply(data_parts$Leaves,data_parts$Libelle,sum))/
-  as.numeric(tapply(data_parts$Leaves,data_parts$Libelle,length))
-tab$Underground<-as.numeric(tapply(data_parts$Underground,data_parts$Libelle,sum))/
-  as.numeric(tapply(data_parts$Underground,data_parts$Libelle,length))
-tab$Wood<-as.numeric(tapply(data_parts$Wood,data_parts$Libelle,sum))/
-  as.numeric(tapply(data_parts$Wood,data_parts$Libelle,length))
-data_part<-data.frame(var=c(rep("Bark",13),rep("Exsudates",13),rep("Fruits",13), rep("Leaves",13), rep("Underground",13), rep("Wood",13)),Part=c(tab$Bark,tab$Exsudates,tab$Fruits,tab$Leaves, tab$Underground, tab$Wood),type=rep(tab$Type,6))
-var<-levels(data_part$var)
-data_part$var<-as.character(data_part$var)
-for (i in var){
-test<-round(wilcox.test(data_part[data_part$var==i & data_part$type=="AAP",]$Part,
-             data_part[data_part$var==i & data_part$type=="ANP",]$Part)$p.value,3)
- data_part[data_part$var== i,]$var<-paste(i," (P=", test, ")", sep="")}
-p <- ggplot(data = data_part, aes(x=var, y=Part)) + 
-   geom_boxplot(aes(fill=type)) +
-   theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
-   coord_flip()
- p + facet_wrap( ~ var, scales="free")
-```
-
 ![](CouacAnalyses_files/figure-markdown_github/parts-1.png)
 
-### Use values and spatial diversity
-
-As for section 3.3.2, an ANOVA was performed in order to detect relationships between the parts potentially used for each plant and species composition of plots. The trends observed are shown in figure 7. Plants with useful seeds and fruits (p &lt; 0.02), leaves and flowers (p &lt; 0.03), underground organs (p &lt; 0.12) and exudates (p &lt; 0.17) were, at diverse scales, more often present on AAPs than on ANPs. The most striking difference concerned species with useful seeds and fruits. Conversely, an increase in the abundance of plants used for their bark (p &lt; 0.06) and to a lesser extent of those used for their wood and stems (p &lt; 0.29) was observed for the ANPs. The different patterns observed appear to support the hypothesis that pre-Columbian humans had a long-term influence on present day patterns of biodiversity.
-
-``` r
-data_spat<-data_uses[!data_uses$Libelle %in% "FC",]
-Nind<-30
-data_spat$richness<-999
-data_spat$Ncrafts<-999
-data_spat$Nconstruction<-999
-data_spat$Nfirewood<-999
-data_spat$Nfood<-999
-data_spat$Nmedicine<-999
-data_spat$Libelle<-as.factor(as.character(data_spat$Libelle))
-for (j in levels(data_spat$Libelle))
-  {test<-data_spat[data_spat$Libelle == j,]
-  sp<-numeric()
-  Ncrafts<-numeric()
-  Nconstruction<-numeric()
-  Nfirewood<-numeric()
-  Nfood<-numeric()
-  Nmedicine<-numeric()
-    for (i in 1:dim(test)[1]){
-    sp[i]<-dim(table(test[rank(as.matrix(dist(x=cbind(test$X,test$Y), diag = F))[i,]) %in% 2:(Nind+1),]$species))
-    Ncrafts[i]<-sum(test[rank(as.matrix(dist(x=cbind(test$X,test$Y), diag = F))[i,]) %in% 2:(Nind+1),]$Crafts >0)
-    Nconstruction[i]<-sum(test[rank(as.matrix(dist(x=cbind(test$X,test$Y), diag = F))[i,]) %in% 2:(Nind+1),]$Construction >0)
-    Nfirewood[i]<-sum(test[rank(as.matrix(dist(x=cbind(test$X,test$Y), diag = F))[i,]) %in% 2:(Nind+1),]$Firewood >0)
-    Nfood[i]<-sum(test[rank(as.matrix(dist(x=cbind(test$X,test$Y), diag = F))[i,]) %in% 2:(Nind+1),]$Food >0)
-    Nmedicine[i]<-sum(test[rank(as.matrix(dist(x=cbind(test$X,test$Y), diag = F))[i,]) %in% 2:(Nind+1),]$Medicine >0)
-    }
-  data_spat[data_spat$Libelle==j,]$richness<-sp
-  data_spat[data_spat$Libelle==j,]$Ncrafts<-Ncrafts
-  data_spat[data_spat$Libelle==j,]$Nconstruction<-Nconstruction
-  data_spat[data_spat$Libelle==j,]$Nfirewood<-Nfirewood
-  data_spat[data_spat$Libelle==j,]$Nfood<-Nfood
-  data_spat[data_spat$Libelle==j,]$Nmedicine<-Nmedicine
-  sp<-NULL
-  print(j)
-}
-data_spat$type<-"ANP"
-library(ggplot2)
-data_spat[data_spat$Libelle %in% c("Aca", "EpBar", "MC87", "Mcwila"),]$type<-"AAP"
-ggplot(data_spat, aes(richness, Nfood, color = factor(type), 
-   shape = factor(Libelle), 
-   linetype = factor(Libelle)))+
-  geom_point()+
-  stat_smooth(method = "loess")
-ggplot(data_spat, aes(richness, Nmedicine, color = factor(type), 
-   shape = factor(Libelle), 
-   linetype = factor(Libelle)))+
-  geom_point()+
-  stat_smooth(method = "loess")
-ggplot(data_spat, aes(richness, Nconstruction, color = factor(type), 
-   shape = factor(Libelle), 
-   linetype = factor(Libelle)))+
-  geom_point()+
-  stat_smooth(method = "loess")
-ggplot(data_spat, aes(richness, Nfirewood, color = factor(type), 
-   shape = factor(Libelle), 
-   linetype = factor(Libelle)))+
-  geom_point()+
-  stat_smooth(method = "loess")
-ggplot(data_spat, aes(richness, Ncrafts, color = factor(type), 
-   shape = factor(Libelle), 
-   linetype = factor(Libelle)))+
-  geom_point()+
-  stat_smooth(method = "loess")
-
-summary(glm(data_spat$Nmedicine ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle))
-summary(glm(data_spat$Ncrafts ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle-1))
-summary(glm(data_spat$Nconstruction ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle))
-summary(glm(data_spat$Nfirewood ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle))
-summary(glm(data_spat$Nfood ~ data_spat$Libelle + data_spat$richness:data_spat$type + data_spat$richness:data_spat$Libelle))
-```
+<!-- ### Use values and spatial diversity -->
+<!-- As for section 3.3.2, an ANOVA was performed in order to detect relationships between the parts potentially used for each plant and species composition of plots. The trends observed are shown in figure 7. Plants with useful seeds and fruits (p < 0.02), leaves and flowers (p < 0.03), underground organs (p < 0.12) and exudates (p < 0.17) were, at diverse scales, more often present on AAPs than on ANPs. The most striking difference concerned species with useful seeds and fruits. Conversely, an increase in the abundance of plants used for their bark (p < 0.06) and to a lesser extent of those used for their wood and stems (p < 0.29) was observed for the ANPs. The different patterns observed appear to support the hypothesis that pre-Columbian humans had a long-term influence on present day patterns of biodiversity.  -->
+Discussion
+==========
 
 Supplementary materials
 =======================
