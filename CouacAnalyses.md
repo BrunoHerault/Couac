@@ -25,6 +25,12 @@ Hérault, Odonne & co
         -   [Traditional uses](#traditional-uses-1)
         -   [Plant parts](#plant-parts-1)
 -   [Discussion](#discussion)
+    -   [Forest structure, still modified](#forest-structure-still-modified)
+    -   [Forest composition, a good indicator of pre-Columbian occupation](#forest-composition-a-good-indicator-of-pre-columbian-occupation)
+    -   [Forest diversity, an uninterpretable indicator](#forest-diversity-an-uninterpretable-indicator)
+    -   [Ethnobotanical aspects, a new light on forest composition](#ethnobotanical-aspects-a-new-light-on-forest-composition)
+    -   [Use and plant parts categories](#use-and-plant-parts-categories)
+-   [Conclusion](#conclusion)
 -   [Supplementary materials](#supplementary-materials)
     -   [Archeological Description of the sampled sites](#archeological-description-of-the-sampled-sites)
         -   [Aca : The Acarouany site](#aca-the-acarouany-site)
@@ -197,6 +203,40 @@ As for section 3.3.2, an ANOVA was performed in order to detect relationships be
 Discussion
 ==========
 
+Forest structure, still modified
+--------------------------------
+
+*to be written*
+
+Forest composition, a good indicator of pre-Columbian occupation
+----------------------------------------------------------------
+
+The DCA suggests some differences in species distribution between AAPs and ANPs, making anthropization an important explanatory factor for deciphering floristic patterns in interfluvial terra firme forests on the Guiana shield. Nevertheless, tropical forest dynamics are complex and pre-Columbian influence cannot be responsible for all the variability. Another factor is the geographic gradient, most likely reflecting abiotic factors such as rainfall and its seasonal variations and soil properties (de Granville, 2002; Guitet et al., 2016). This result, corroborating the recently published work at the scale of the Amazon basin by Levis et al. (2017), is of utmost importance for the Guiana shield as it is the region where Levis et al. found the lower correlation, both in terms of abundance and in terms of richness, between domesticated species and archaeological sites. Human influence was however not homogeneous, as exemplified by the Aca plot, stands closer to the western ANPs on the graphic (figures X), illustrating the influence of geographical gradients. Another possible hypothesis might be a different kind of pre-Columbian occupation for the Aca plot. Topography of archeological elements in this plot suggests an agricultural field, a kind of land use that might have been shorter in time than the other, more perennial, occupations (ditched/ring-ditched sites). Conversely, these other apparently anthropized sites are all located in central or eastern French Guiana. Owing to the probably massive effort required to build these structures, occupation might have been longer and its influence on biodiversity more pervasive.
+
+In terms of plant families (Sup Mat), it is difficult to discriminate AAPs from ANPs, as only three families (Lecythidaceae, Burseraceae and Arecaceae) show a clear pattern of association, that are incidentally observed with other more precise indicators, such as indicator species (Sup Mat). XX species appear to be closely associated with AAPs or ANPs. In the bibliography, species closely related to the Guianese species in our plots, notably from the genera Oenocarpus and Astrocaryum (Balée and Erickson, 2006; Junqueira et al., 2011) are known to be associated with ancient disturbed forests. Due to a relative singularity of the Guiana shield flora, these XX species significantly differ from those observed by Junqueira et al. (2011) in the Madeira River drainage, and they might be considered as important indicators for future studies in historical ecology in the region.
+
+*add someting on functional composition*
+
+Forest diversity, an uninterpretable indicator
+----------------------------------------------
+
+Neutral and functional diversities are more difficult to interpret than composition, owing to the fact that curves overlapped on order *q*. The generality of Balée’s hypothesis that past human occupation would have elevated species diversity of Amazonian forests (Balée, 1994) is also to be questioned, as it seems here that the effect varies among sites. The global trend seems effectively to be an increase of neutral α-diversity in AAPs compared to ANPs for order 0 but the pattern is somewhat reversed at order 2. In any case, presence of pre-Columbian human occupations should be taken into consideration as a factor potentially altering patterns of diversity but there is many confounding effects *e.g* biogeography, soil types and geological factors. The relations among these different factors is a subject for future studies.
+
+Ethnobotanical aspects, a new light on forest composition
+---------------------------------------------------------
+
+Interestingly, the weak predominance of given families in the plots (Supp Mat X) as well as the presence of indicator species (Supp Mat X) can be surprisingly well explained by ethnobotany. For example the families most associated with AAPs (Arecaceae, Myrtaceae, Urticaceae and Euphorbiaceae) are in effect well known for their edible fruits. Nevertheless, discussing at the family level is difficult owing to variation in uses among confamilial species that prohibits a precise analysis. Concerning indicator species, both potential uses and successional status explain a large part of their relevance. Among the most numerous species, *Oenocarpus bacaba* and *Astrocaryum sciophilum* are still today esteemed for their edible fruits and probably previously constituted a large part of the diet of pre-Columbian humans. Seeds of *Conceveiba guianensis* are also edible, but not much used today. Although its use might explain its abundance in AAPs, its successional status is probably more important. *Pourouma minor* and *Lecythis poiteaui* are not known for their edible fruits, but rather are used for their wood and bark in construction and crafts, so their relation to anthropization is probably linked to a secondary property, such as ecological status. The use patterns of *Lecythis persistens* is exactly the same as that of *L. poiteaui*, but the former is the most numerous species on ANPs. Why these two species, which share a similar ecological status and the same pattern of use show opposite association with ANPs and AAPs, is a question that is still unanswered.
+
+Use and plant parts categories
+------------------------------
+
+Categories of traditional uses are heterogeneously related to the impact on the resource, and are thus complemented by the category of the plant part used. The more frequent presence of edible species on AAPs (figure X) is accompanied by the increased proportion of species whose seeds and fruits are useful (figure X), and is the most salient result of this study, extending the conclusion of Levis et al. (2017) to French Guiana, and probably to the Guiana shield in general. The 121 edible species censed in our plots mainly belong to the semi-domesticated or incipiently domesticated categories of Levis et al. (2017), and are often close relative of some of the 85 edible species censed by these authors. Another interesting aspect is the abundance in ANPs of species used in construction (figure X). The trend is clear enough to suggest a new hypothesis about pre-Columbian impacts on the forest. This observation is confirmed by the “plant parts” category analyses (figure 7), which found that plants used respectively for their bark were more present in ANPs, although *p* values indicate variable significance of these association. This probable negative influence of past occupation on modern biodiversity was observed neither by Levis et al. (2017) nor by Junqueira et al. (2011). Conclusions are difficult to draw for species belonging to the “medicine and magic” and “arts and crafts” categories which showed no clear pattern. This might be explained by the fact that medicinal or crafts species are used in many different ways, some with detrimental effects, some with no or positive impacts. In the same way, the positive and significant correlation between plants used for their leaves and flowers and their abundance in AAPs is probably explained by the extremely frequent use of palm leaves in crafts, and it probably mainly reflects the abundance of palms in AAPs due to the concentration of seeds related to their edibility. Use of underground organs of trees concerns only four species (*Socratea exorrhiza*, *Cecropia obtusa*, *Tovomita brasiliensis* and *Ptychopetalum olacoides*), and the observed correlation with AAPs certainly owes more to the pioneer status and the hyperdominance of both *C. obtusa* and *S. exorrhiza* (Ter Steege et al., 2013) than to these uses. Lastly, the lack of association of plants used for their exudates with one or the other kind of plot probably reflects, in addition to factors discussed earlier, the weak impact exerted by humans through this kind of uses.
+
+Conclusion
+==========
+
+At the regional scale, forest structure and composition seems the best ecological indicator to discriminate sites showing evidence of pre-Columbian occupation from sites not showing such occupation in terra firme forests of French Guianese. Nevertheless, local ecological heterogeneity makes it difficult to separate such effects from those of geographical gradients. Successional status and utility might both be responsible for the patterns observed, but teasing apart their influences is far too difficult at present. It is also evident that, beyond the classic concept of functional diversity, taking into consideration the utilitarian diversity (*i.e.* the range of potential uses of plants for pre-Columbian Americans) helps us understand human influence on these forests. Creating a comprehensive database to fulfill this objective is nevertheless a difficult task, due to several approximations, and notably to the absence of memory or of remains dating back to the last millennium. This problem was roughly circumvented by merging important ethnobotanical datasets. It appears that the edibility of some plants probably enhances their association with pre-Columbian disturbed forests, in a kind of positive interaction, similar to the conclusions of Levis et al. (2017). What was expected but never demonstrated before is that pre-Columbian uses for construction of wood and, to a lesser extent, of bark, might also have been detrimental to some species. Regardless of the lack of data concerning interfluvial archeology in Amazonia (Piperno et al., 2017), pre-Columbian influences on Amazonian forests is probably most important than what is assumed by Levis et al. (2017), challenging by the way the neutral theory and the concept of stochasticity much in use for Amazonian diversity (Chave, 2004; Rosindell et al., 2011), as well as the romantic cliché of Amerindians living in harmony with the forest.
+
 Supplementary materials
 =======================
 
@@ -218,27 +258,6 @@ Effects on anthropization on abundance of Botanical Families
 
 The 20 most abundant families were unequally distributed between AAPs and ANPs (Figure XX). Only three families had clear patterns of segregation (*P* &lt; 0.05). These are Arecaceae, Burseraceae and Lauraceae that are significantly more frequent in AAPs. On the other hand, Apocynaceae and Lecythidaceae are marginally (*P*&lt;0.1) less frequent in AAPs.
 
-``` r
-library(ggplot2)
-data_fam<-data[data$Famille %in% names(sort(table(data$Famille),decreasing = T))[1:20],]
-data_fam$Famille<-as.factor(as.character(data_fam$Famille))
-data_fam<-as.data.frame(table(data_fam$Libelle,data_fam$Famille)/rowSums(table(data_fam$Libelle,data_fam$Famille)))
-data_fam<-merge(data_fam,tab, by.x="Var1", by.y="Plot_Name")
-data_fam$Sites<-data_fam$Var1
-fam<-levels(data_fam$Var2)
-data_fam$Var2<-as.character(data_fam$Var2)
-for (i in fam){
-test<-round(wilcox.test(data_fam[data_fam$Var2==i & data_fam$Type=="AAP",]$Freq,
-            data_fam[data_fam$Var2==i & data_fam$Type=="ANP",]$Freq)$p.value,2)
-data_fam[data_fam$Var2== i,]$Var2<-paste(i," (P=", test, ")", sep="")}
-p <- ggplot(data = data_fam, aes(x=Var2, y=Freq)) + 
-  geom_boxplot(aes(fill=Type)) +
-  theme(axis.text.y=element_blank(), axis.title.y=element_blank())+
-  labs(y = "Relative Frequencies") +
-  coord_flip()
-p + facet_wrap( ~ Var2, scales="free")
-```
-
 ![](CouacAnalyses_files/figure-markdown_github/fam-1.png)
 
 *Relative frequencies of the 20 most abundant families in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP). Wilcoxon Rank test of significance.*
@@ -247,28 +266,6 @@ Indicator Species of anthropized AAP plots
 ------------------------------------------
 
 The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. *Pourouma minor*, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
-
-``` r
-library(indicspecies)
-#IS<-multipatt(as.data.frame.matrix(data_dca),cluster=as.numeric(tab$Type),duleg=T) # save time
-#save(IS,file="IS.Rdata")
-load("IS.Rdata")
-indic<-data.frame(Species=colnames(data_dca)[IS$sign[,5]<0.05],
-                  Indicator=IS$sign$index[IS$sign[,5]<0.05],
-                  Strength=round(IS$str[IS$sign[,5]<0.05,1],3),
-                  Pvalue=round(IS$sign$p.value[IS$sign[,5]<0.05],3))
-indic<-indic[!indic$Species =="Indet.Lauraceae sp.6",]
-fam<-unique(data.frame(Species=data[data$species %in% rownames(indic),]$species, Family=data[data$species %in% rownames(indic),]$Famille))
-indic<-merge(indic,fam)
-indic<-data.frame(Family=indic$Family,Species=indic$Species,Indicator=indic$Indicator, Strength=indic$Strength,Pvalue=indic$Pvalue)
-indic[indic$Indicator==2,]$Indicator<-"ANP"
-indic[indic$Indicator==1,]$Indicator<-"AAP"
-indic[indic$Strength<0.5,]$Strength<-1-indic[indic$Strength<0.5,]$Strength
-indic<-indic[order(indic$Indicator),]
-indic<-indic[-8,]
-rownames(indic)<-NULL
-kable(indic)
-```
 
 | Family        | Species               | Indicator |  Strength|  Pvalue|
 |:--------------|:----------------------|:----------|---------:|-------:|
@@ -279,69 +276,6 @@ kable(indic)
 
 Effects on anthropization on community diversity profiles
 ---------------------------------------------------------
-
-``` r
-library(entropart)
-meta<-MetaCommunity(t(data_dca))
-Profile <- DivProfile(q.seq = seq(0, 3, 0.03), meta, Biased = FALSE)
-q0<-wilcox.test(Profile$CommunityAlphaDiversities[1,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[1,as.numeric(tab$Type)==2])
-q1<-wilcox.test(Profile$CommunityAlphaDiversities[33,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[33,as.numeric(tab$Type)==2])
-q2<-wilcox.test(Profile$CommunityAlphaDiversities[67,as.numeric(tab$Type)==1], x = Profile$CommunityAlphaDiversities[67,as.numeric(tab$Type)==2])
-par(mfrow=c(1,2), las=1)
-plot(rownames(Profile$CommunityAlphaDiversities),Profile$CommunityAlphaDiversities[,1], type="l", col="red", ylab="Neutral Alpha Diversity", xlab="Diversity Order q", lty=2, ylim=c(0,450))
-color<-as.character(tab$Type)
-color[color=="AAP"]<-"red"
-color[color=="ANP"]<-"black"
-for (i in 2:13){
-  points(rownames(Profile$CommunityAlphaDiversities),Profile$CommunityAlphaDiversities[,i], type="l", lty=((-as.numeric(tab$Type)+3)[i]), col=color[i])
-}
-# data_tree<-data.frame(name=unique(data$species))
-# library(stringr)
-# data_tree$genus<-str_split_fixed(data_tree$name, " ", 2)[,1]
-# data_tree$species<-str_split_fixed(data_tree$name, " ", 2)[,2]
-# library(BIOMASS)
-# data_tree$wd<-getWoodDensity(data_tree$genus,data_tree$species)$meanWD
-# data_tree<-merge(data_tree,traits, by.x="name", by.y="Taxon", all.x=T, all.y=F)
-# test<-tapply(data_tree$Seed,data_tree$genus,mean,na.rm=T)
-# for (i in 1:dim(data_tree)[1])
-# {if (is.na(data_tree$Seed[i])==T)  {data_tree$Seed[i]<-test[data_tree$genus[i] == names(test)]}
-# }
-# test<-tapply(data_tree$SLA,data_tree$genus,mean,na.rm=T)
-# for (i in 1:dim(data_tree)[1])
-# {if (is.na(data_tree$SLA[i])==T)  {data_tree$SLA[i]<-test[data_tree$genus[i] == names(test)]}
-# }
-# test<-tapply(data_tree$Height,data_tree$genus,mean,na.rm=T)
-# for (i in 1:dim(data_tree)[1])
-# {if (is.na(data_tree$Height[i])==T)  {data_tree$Height[i]<-test[data_tree$genus[i] == names(test)]}
-#   }
-# data<-merge(data,data_tree, by.x="species", by.y="name", all.x=T, all.y=F) # 18% of missing values, we first use phylo conserv and then MICE to fill in
-#library(mice)
-#summary(data_tree)
-#data_tree<-complete(mice(data_tree, m=20))
-#save(data_tree, file="data_tree.R")
-load("data_tree.R")
-data_tree$Seed<-as.ordered((data_tree$Seed))
-row.names(data_tree)<-data_tree$name
-data_tree[,1:3]<-NULL
-library(cluster)
-data.daisy <- daisy(data_tree, metric = "gower")
-data.agnes <- agnes(data.daisy, method="ward")
-data_phylo <- as.hclust(data.agnes)
-#Profile_phylo <- DivProfile(q.seq = seq(0, 3, 0.03), MC=meta, Biased = FALSE, Tree=data_phylo)  #maybe try also with a similarity matrix Z because with a tree it's fuzzy and a lot of variance has been lost when building the tree
-#save(Profile_phylo, file="Profile_phylo.R")
-load("Profile_phylo.R")
-#Profile_dqz <- DivProfile(q.seq = seq(0, 3, 0.03), MC=meta, Biased = FALSE, Z=1-as.matrix(data.daisy)) # idem keep with Profile_Phylo
-q0<-wilcox.test(Profile_phylo$CommunityAlphaDiversities[1,as.numeric(tab$Type)==1], x = Profile_phylo$CommunityAlphaDiversities[1,as.numeric(tab$Type)==2])
-q1<-wilcox.test(Profile_phylo$CommunityAlphaDiversities[33,as.numeric(tab$Type)==1], x = Profile_phylo$CommunityAlphaDiversities[33,as.numeric(tab$Type)==2])
-q2<-wilcox.test(Profile_phylo$CommunityAlphaDiversities[67,as.numeric(tab$Type)==1], x = Profile_phylo$CommunityAlphaDiversities[67,as.numeric(tab$Type)==2])
-plot(rownames(Profile_phylo$CommunityAlphaDiversities),Profile_phylo$CommunityAlphaDiversities[,1], type="l", col="red", ylab="Functional Alpha Diversity", xlab="Diversity Order q", lty=2, ylim=c(0,15))
-color<-as.character(tab$Type)
-color[color=="AAP"]<-"red"
-color[color=="ANP"]<-"black"
-for (i in 2:13){
-  points(rownames(Profile_phylo$CommunityAlphaDiversities),Profile_phylo$CommunityAlphaDiversities[,i], type="l", lty=((-as.numeric(tab$Type)+3)[i]), col=color[i])
-}
-```
 
 ![](CouacAnalyses_files/figure-markdown_github/Diver-1.png)
 
