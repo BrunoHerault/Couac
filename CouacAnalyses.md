@@ -267,10 +267,23 @@ Indicator Species of anthropized AAP plots
 
 The indicator species analysis led to the identification of 13 indicator species (*i.e.* species that were both more exclusive and more abundant) for AAPs, and 4 species only for ANPs. Among the species associated with AAPs were 3 *Inga*, 2 species of Burseraceae, 2 of Arecaceae and 2 Euphorbiaceae. *Oenocarpus bacaba* and *Astrocaryum sciophilum*, both palms, were especially present on the plot MCwila. *Pourouma minor*, a common successional species, was found mainly in plots Aca and FC. Concerning indicator species for ANPs, two Lecythidaceae species stands out among which *Lecythis persistens* known to be locally abundant, *e.g.* in the Paracou sites Par6 and Par18. The other two species associated with ANPs were less abundant, but highly exclusive.
 
-| Family        | Species               | Indicator |  Strength|  Pvalue|
-|:--------------|:----------------------|:----------|---------:|-------:|
-| Euphorbiaceae | Conceveiba guianensis | AAP       |      0.87|   0.020|
-| Lecythidaceae | Couratari multiflora  | ANP       |      1.00|   0.015|
+| Family          | Species                | Indicator |  Strength|  Pvalue|
+|:----------------|:-----------------------|:----------|---------:|-------:|
+| Arecaceae       | Astrocaryum sciophilum | AAP       |     0.908|   0.030|
+| Fabaceae        | Batesia floribunda     | AAP       |     0.775|   0.045|
+| Euphorbiaceae   | Conceveiba guianensis  | AAP       |     0.868|   0.010|
+| Fabaceae        | Inga alba              | AAP       |     0.857|   0.015|
+| Arecaceae       | Oenocarpus bacaba      | AAP       |     0.872|   0.020|
+| Urticaceae      | Pourouma melinonii     | AAP       |     0.819|   0.040|
+| Urticaceae      | Pourouma minor         | AAP       |     0.769|   0.025|
+| Burseraceae     | Protium trifoliolatum  | AAP       |     0.962|   0.025|
+| Moraceae        | Pseudolmedia laevis    | AAP       |     0.894|   0.020|
+| Meliaceae       | Carapa surinamensis    | ANP       |     0.732|   0.045|
+| Lecythidaceae   | Couratari multiflora   | ANP       |     1.000|   0.010|
+| Lecythidaceae   | Gustavia hexapetala    | ANP       |     0.740|   0.030|
+| Lecythidaceae   | Lecythis persistens    | ANP       |     0.729|   0.015|
+| Melastomataceae | Mouriri crassifolia    | ANP       |     1.000|   0.020|
+| Simaroubaceae   | Simaba cedron          | ANP       |     1.000|   0.025|
 
 *Indicator species in either Apparently Anthropized Plot (AAP) or Apparently Non-anthropized Plot (ANP), Families, Botanical names, Strength of the Association and P values.*
 
